@@ -642,6 +642,7 @@ export default function FrameworkBreakersAssessment() {
   const [name, setName] = useState("");
   const [emailUnlocked, setEmailUnlocked] = useState(false);
   const [paidIntentClicked, setPaidIntentClicked] = useState(false);
+  const [intentChoice, setIntentChoice] = useState("free");
   const isComplete = Object.keys(answers).length === questions.length;
   const result = useMemo(() => getResult(answers), [answers]);
   const current = questions[step];
@@ -667,9 +668,12 @@ export default function FrameworkBreakersAssessment() {
     if (step > 0) setStep((prevStep) => prevStep - 1);
   }
 
-  async function sendLeadToGoogleForm(reportIntent = "否", coachingIntent = "否") {
+  async function sendLeadToGoogleForm() {
     const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfgIhKyFPDMSt4NyLHWxoHqJYTz9XVylT4R90lqgZQOJj5mGw/formResponse";
     const formData = new FormData();
+
+    const wantsReport = intentChoice === "report" ? "是" : "否";
+    const wantsCoaching = intentChoice === "coaching" ? "是" : "否";
 
     formData.append("entry.1407072553", name || "");
     formData.append("entry.1917274556", email || "");
@@ -678,8 +682,8 @@ export default function FrameworkBreakersAssessment() {
     formData.append("entry.1484495161", mainObsession.name || "");
     formData.append("entry.1748881777", secondObsession.name || "");
     formData.append("entry.1727596188", String(result.intensity || ""));
-    formData.append("entry.931356060", reportIntent);
-    formData.append("entry.1636982887", coachingIntent);
+    formData.append("entry.931356060", wantsReport);
+    formData.append("entry.1636982887", wantsCoaching);
 
     await fetch(formUrl, {
       method: "POST",
@@ -693,7 +697,7 @@ export default function FrameworkBreakersAssessment() {
     if (!email.includes("@") || email.trim().length < 5) return;
 
     try {
-      await sendLeadToGoogleForm("否", "否");
+      await sendLeadToGoogleForm();
     } catch (error) {
       console.error("Google Form submit failed:", error);
     }
@@ -701,17 +705,9 @@ export default function FrameworkBreakersAssessment() {
     setEmailUnlocked(true);
   }
 
-  async function handlePaidIntentClick() {
+  function handlePaidIntentClick() {
     setPaidIntentClicked(true);
     console.log("paid_intent_clicked");
-
-    if (email.includes("@")) {
-      try {
-        await sendLeadToGoogleForm("是", "否");
-      } catch (error) {
-        console.error("Google Form paid intent submit failed:", error);
-      }
-    }
   }
 
   function reset() {
@@ -721,6 +717,7 @@ export default function FrameworkBreakersAssessment() {
     setName("");
     setEmailUnlocked(false);
     setPaidIntentClicked(false);
+    setIntentChoice("free");
   }
 
   return (
@@ -835,6 +832,41 @@ export default function FrameworkBreakersAssessment() {
                       type="email"
                       className="w-full rounded-xl border border-stone-800 bg-black/30 px-4 py-3 text-stone-100 placeholder:text-stone-600 outline-none transition focus:border-amber-200/60"
                     />
+                    <div className="rounded-xl border border-stone-800 bg-black/20 p-4">
+                      <p className="mb-3 text-sm font-medium text-stone-200">解鎖後，你比較想要哪一種下一步？</p>
+                      <div className="grid gap-2 text-sm text-stone-300">
+                        <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-stone-800 p-3 hover:bg-stone-900">
+                          <input
+                            type="radio"
+                            name="intentChoice"
+                            value="free"
+                            checked={intentChoice === "free"}
+                            onChange={() => setIntentChoice("free")}
+                          />
+                          我先看免費簡易報告
+                        </label>
+                        <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-stone-800 p-3 hover:bg-stone-900">
+                          <input
+                            type="radio"
+                            name="intentChoice"
+                            value="report"
+                            checked={intentChoice === "report"}
+                            onChange={() => setIntentChoice("report")}
+                          />
+                          我想先看完整報告（NT$399）
+                        </label>
+                        <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-stone-800 p-3 hover:bg-stone-900">
+                          <input
+                            type="radio"
+                            name="intentChoice"
+                            value="coaching"
+                            checked={intentChoice === "coaching"}
+                            onChange={() => setIntentChoice("coaching")}
+                          />
+                          我不想再卡住，我想直接被帶
+                        </label>
+                      </div>
+                    </div>
                     <Button type="submit" className="w-full rounded-xl bg-amber-200 py-6 text-base font-semibold text-stone-950 hover:bg-amber-100">
                       解鎖我的免費簡易報告
                     </Button>
@@ -1012,17 +1044,9 @@ export default function FrameworkBreakersAssessment() {
                   我想先看完整報告（NT$399）
                 </Button>
                 <Button
-                  onClick={async () => {
+                  onClick={() => {
                     console.log("coaching_intent_clicked");
                     setPaidIntentClicked("coaching");
-
-                    if (email.includes("@")) {
-                      try {
-                        await sendLeadToGoogleForm("否", "是");
-                      } catch (error) {
-                        console.error("Google Form coaching intent submit failed:", error);
-                      }
-                    }
                   }}
                   variant="outline"
                   className="w-full rounded-xl border-amber-300/30 bg-transparent py-6 text-base font-semibold text-amber-100 hover:bg-amber-950/30"
