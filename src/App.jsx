@@ -667,7 +667,7 @@ export default function FrameworkBreakersAssessment() {
     if (step > 0) setStep((prevStep) => prevStep - 1);
   }
 
-  async function submitLeadToGoogleForm({ paidReportIntent = "否", coachingIntent = "否" } = {}) {
+  async function sendLeadToGoogleForm({ paidReportIntent = "否", coachingIntent = "否" } = {}) {
     const formUrl =
       "https://docs.google.com/forms/d/e/1FAIpQLSfgIhKyFPDMSt4NyLHWxoHqJYTz9XVylT4R90lqgZQOJj5mGw/formResponse";
 
@@ -694,9 +694,9 @@ export default function FrameworkBreakersAssessment() {
     if (!email.includes("@") || email.trim().length < 5) return;
 
     try {
-      await submitLeadToGoogleForm({ paidReportIntent: "否", coachingIntent: "否" });
+      await sendLeadToGoogleForm({ paidReportIntent: "否", coachingIntent: "否" });
     } catch (error) {
-      console.error("Google Form submit failed:", error);
+      console.error("Google Form submit failed", error);
     }
 
     setEmailUnlocked(true);
@@ -705,9 +705,9 @@ export default function FrameworkBreakersAssessment() {
   async function handlePaidIntentClick() {
     setPaidIntentClicked(true);
     try {
-      await submitLeadToGoogleForm({ paidReportIntent: "是", coachingIntent: "否" });
+      await sendLeadToGoogleForm({ paidReportIntent: "是", coachingIntent: "否" });
     } catch (error) {
-      console.error("Paid intent submit failed:", error);
+      console.error("Paid report intent submit failed", error);
     }
     console.log("paid_intent_clicked");
   }
@@ -838,7 +838,7 @@ export default function FrameworkBreakersAssessment() {
                     </Button>
                   </div>
                   <p className="mt-4 text-xs leading-6 text-stone-500">
-                    MVP 測試版：送出後會寫入 Google Form / Google Sheet；目前不會自動寄送 Email。
+                    MVP 測試版：目前不會真的寄送 Email。正式上線時可串接 ConvertKit、MailerLite、Google Sheet、Airtable 或 Notion 表單。
                   </p>
                 </form>
               </motion.div>
@@ -1017,9 +1017,9 @@ export default function FrameworkBreakersAssessment() {
                     console.log("coaching_intent_clicked");
                     setPaidIntentClicked("coaching");
                     try {
-                      await submitLeadToGoogleForm({ paidReportIntent: "否", coachingIntent: "是" });
+                      await sendLeadToGoogleForm({ paidReportIntent: "否", coachingIntent: "是" });
                     } catch (error) {
-                      console.error("Coaching intent submit failed:", error);
+                      console.error("Coaching intent submit failed", error);
                     }
                   }}
                   variant="outline"
