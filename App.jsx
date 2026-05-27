@@ -663,15 +663,52 @@ export default function FrameworkBreakersAssessment() {
     }, 180);
   }
 
-  function submitEmailGate(event) {
+  function goBackOneStep() {
+    if (step > 0) setStep((prevStep) => prevStep - 1);
+  }
+
+  async function sendLeadToGoogleForm({ paidReportIntent = "否", coachingIntent = "否" } = {}) {
+    const formUrl =
+      "https://docs.google.com/forms/d/e/1FAIpQLSfgIhKyFPDMSt4NyLHWxoHqJYTz9XVylT4R90lqgZQOJj5mGw/formResponse";
+
+    const formData = new FormData();
+    formData.append("entry.1407072553", name || "");
+    formData.append("entry.1917274556", email || "");
+    formData.append("entry.1357505889", outerArchetype?.name || "");
+    formData.append("entry.1940201517", mainArchetype?.name || "");
+    formData.append("entry.1484495161", mainObsession?.name || "");
+    formData.append("entry.1748881777", secondObsession?.name || "");
+    formData.append("entry.1727596188", String(result?.intensity || ""));
+    formData.append("entry.931356060", paidReportIntent);
+    formData.append("entry.1636982887", coachingIntent);
+
+    await fetch(formUrl, {
+      method: "POST",
+      mode: "no-cors",
+      body: formData,
+    });
+  }
+
+  async function submitEmailGate(event) {
     event.preventDefault();
     if (!email.includes("@") || email.trim().length < 5) return;
+
+    try {
+      await sendLeadToGoogleForm({ paidReportIntent: "否", coachingIntent: "否" });
+    } catch (error) {
+      console.error("Google Form submit failed", error);
+    }
+
     setEmailUnlocked(true);
   }
 
-  function handlePaidIntentClick() {
+  async function handlePaidIntentClick() {
     setPaidIntentClicked(true);
-    // 未來可接 GA / Meta Pixel / 自建 API
+    try {
+      await sendLeadToGoogleForm({ paidReportIntent: "是", coachingIntent: "否" });
+    } catch (error) {
+      console.error("Paid report intent submit failed", error);
+    }
     console.log("paid_intent_clicked");
   }
 
@@ -739,7 +776,7 @@ export default function FrameworkBreakersAssessment() {
                     <button
                       key={option.text}
                       onClick={() => selectOption(option)}
-                      className="group rounded-2xl border border-stone-800 bg-stone-900/60 p-4 text-left transition duration-200 hover:-translate-y-0.5 hover:border-amber-200/50 hover:bg-stone-900 hover:shadow-xl hover:shadow-amber-950/20"
+                      className={`group rounded-2xl border p-4 text-left transition duration-200 hover:-translate-y-0.5 hover:border-amber-200/50 hover:bg-stone-900 hover:shadow-xl hover:shadow-amber-950/20 ${answers[current.id]?.text === option.text ? "border-amber-300/50 bg-amber-950/20" : "border-stone-800 bg-stone-900/60"}`}
                     >
                       <div className="flex items-center justify-between gap-4">
                         <span className="text-[1rem] leading-7 text-stone-200">
@@ -750,6 +787,18 @@ export default function FrameworkBreakersAssessment() {
                       </div>
                     </button>
                   ))}
+                </div>
+                <div className="mt-6 flex flex-col gap-3 border-t border-stone-800 pt-5 md:flex-row md:items-center md:justify-between">
+                  <Button
+                    type="button"
+                    onClick={goBackOneStep}
+                    disabled={step === 0}
+                    variant="outline"
+                    className="border-stone-700 bg-transparent text-stone-300 hover:bg-stone-900 disabled:cursor-not-allowed disabled:opacity-30"
+                  >
+                    ← 回到上一題
+                  </Button>
+                  <p className="text-xs leading-6 text-stone-500">建議直覺作答，不需要想出最完美答案。</p>
                 </div>
               </motion.div>
             ) : !emailUnlocked ? (
@@ -964,9 +1013,14 @@ export default function FrameworkBreakersAssessment() {
                   我想先看完整報告（NT$399）
                 </Button>
                 <Button
-                  onClick={() => {
+                  onClick={async () => {
                     console.log("coaching_intent_clicked");
                     setPaidIntentClicked("coaching");
+                    try {
+                      await sendLeadToGoogleForm({ paidReportIntent: "否", coachingIntent: "是" });
+                    } catch (error) {
+                      console.error("Coaching intent submit failed", error);
+                    }
                   }}
                   variant="outline"
                   className="w-full rounded-xl border-amber-300/30 bg-transparent py-6 text-base font-semibold text-amber-100 hover:bg-amber-950/30"
