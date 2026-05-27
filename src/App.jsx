@@ -642,7 +642,7 @@ export default function FrameworkBreakersAssessment() {
   const [name, setName] = useState("");
   const [emailUnlocked, setEmailUnlocked] = useState(false);
   const [paidIntentClicked, setPaidIntentClicked] = useState(false);
-  const [intentChoice, setIntentChoice] = useState("free");
+  const [intentChoice, setIntentChoice] = useState("understand");
   const isComplete = Object.keys(answers).length === questions.length;
   const result = useMemo(() => getResult(answers), [answers]);
   const current = questions[step];
@@ -672,8 +672,8 @@ export default function FrameworkBreakersAssessment() {
     const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfgIhKyFPDMSt4NyLHWxoHqJYTz9XVylT4R90lqgZQOJj5mGw/formResponse";
     const formData = new FormData();
 
-    const wantsReport = intentChoice === "report" ? "是" : "否";
-    const wantsCoaching = intentChoice === "coaching" ? "是" : "否";
+    const wantsReport = intentChoice === "deepReport" ? "是" : "否";
+    const wantsCoaching = intentChoice === "breakthrough" ? "是" : "否";
 
     formData.append("entry.1407072553", name || "");
     formData.append("entry.1917274556", email || "");
@@ -717,7 +717,7 @@ export default function FrameworkBreakersAssessment() {
     setName("");
     setEmailUnlocked(false);
     setPaidIntentClicked(false);
-    setIntentChoice("free");
+    setIntentChoice("understand");
   }
 
   return (
@@ -809,10 +809,10 @@ export default function FrameworkBreakersAssessment() {
                   <h3 className="text-3xl font-semibold leading-tight tracking-[-0.04em] md:text-5xl">
                     你的破框結果已經生成。
                     <br />
-                    <span className="text-amber-100">留下 Email，解鎖免費簡易報告。</span>
+                    <span className="text-amber-100">留下 Email，解鎖你的結果。</span>
                   </h3>
                   <p className="mt-5 text-lg leading-9 text-stone-300">
-                    免費版會顯示你的外層原型、內在原型、主副執念、刺痛句、轉化強度與三個月後預言。完整深度報告則會保留在付費版解鎖。
+                    這份結果會先讓你看見：你外在呈現的是誰、內在如何保護自己，以及真正卡住你的那一扇門。
                   </p>
                 </div>
 
@@ -833,42 +833,43 @@ export default function FrameworkBreakersAssessment() {
                       className="w-full rounded-xl border border-stone-800 bg-black/30 px-4 py-3 text-stone-100 placeholder:text-stone-600 outline-none transition focus:border-amber-200/60"
                     />
                     <div className="rounded-xl border border-stone-800 bg-black/20 p-4">
-                      <p className="mb-3 text-sm font-medium text-stone-200">解鎖後，你比較想要哪一種下一步？</p>
+                      <p className="mb-2 text-base font-semibold text-stone-100">如果你願意繼續往下看，</p>
+                      <p className="mb-4 text-sm leading-7 text-stone-400">你現在最想知道的是？</p>
                       <div className="grid gap-2 text-sm text-stone-300">
-                        <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-stone-800 p-3 hover:bg-stone-900">
+                        <label className="flex cursor-pointer items-center gap-3 rounded-lg border border-stone-800 p-3 transition hover:border-amber-300/30 hover:bg-stone-900">
                           <input
                             type="radio"
                             name="intentChoice"
-                            value="free"
-                            checked={intentChoice === "free"}
-                            onChange={() => setIntentChoice("free")}
+                            value="understand"
+                            checked={intentChoice === "understand"}
+                            onChange={() => setIntentChoice("understand")}
                           />
-                          我先看免費簡易報告
+                          <span>我想先理解自己到底卡在哪</span>
                         </label>
-                        <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-stone-800 p-3 hover:bg-stone-900">
+                        <label className="flex cursor-pointer items-center gap-3 rounded-lg border border-stone-800 p-3 transition hover:border-amber-300/30 hover:bg-stone-900">
                           <input
                             type="radio"
                             name="intentChoice"
-                            value="report"
-                            checked={intentChoice === "report"}
-                            onChange={() => setIntentChoice("report")}
+                            value="deepReport"
+                            checked={intentChoice === "deepReport"}
+                            onChange={() => setIntentChoice("deepReport")}
                           />
-                          我想先看完整報告（NT$399）
+                          <span>我想知道完整的潛意識循環與破解方式</span>
                         </label>
-                        <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-stone-800 p-3 hover:bg-stone-900">
+                        <label className="flex cursor-pointer items-center gap-3 rounded-lg border border-stone-800 p-3 transition hover:border-amber-300/30 hover:bg-stone-900">
                           <input
                             type="radio"
                             name="intentChoice"
-                            value="coaching"
-                            checked={intentChoice === "coaching"}
-                            onChange={() => setIntentChoice("coaching")}
+                            value="breakthrough"
+                            checked={intentChoice === "breakthrough"}
+                            onChange={() => setIntentChoice("breakthrough")}
                           />
-                          我不想再卡住，我想直接被帶
+                          <span>我不想再自己繞圈，我想直接突破</span>
                         </label>
                       </div>
                     </div>
                     <Button type="submit" className="w-full rounded-xl bg-amber-200 py-6 text-base font-semibold text-stone-950 hover:bg-amber-100">
-                      解鎖我的免費簡易報告
+                      解鎖我的結果
                     </Button>
                   </div>
                 </form>
@@ -1015,13 +1016,16 @@ export default function FrameworkBreakersAssessment() {
           <Card className="sticky top-6 border-amber-300/25 bg-gradient-to-br from-stone-950 via-stone-950 to-amber-950/35 text-stone-100 shadow-2xl shadow-black/30">
             <CardContent className="p-6">
               <SectionLabel icon={Lock} tone="amber">
-                付費解鎖｜完整原型報告
+                結果深化｜看見真正的卡點
               </SectionLabel>
               <h3 className="text-2xl font-semibold leading-snug tracking-[-0.03em] text-stone-50">
-                免費報告讓你看見問題，完整報告帶你拆掉問題。
+                你真正卡住的，從來不是能力不夠。
               </h3>
               <p className="mt-4 leading-8 text-stone-300">
-                你會得到的不只是更多文字，而是把你的外層身份、內在原型、主副執念、關係模式、金錢卡點與七日破框行動完整串起來。
+                而是你一直在用同一套潛意識模式，重複活成同樣的人生。你以為你只是焦慮、拖延、受傷、失控或不敢開始，但真正的問題是：你正在用某種「保護自己的方式」，慢慢消耗你的人生。
+              </p>
+              <p className="mt-4 leading-8 text-stone-300">
+                完整報告不是更多資訊，而是幫你看見：到底是哪個「你」，正在替你做選擇。
               </p>
               {isComplete && (
                 <div className="mt-5 space-y-4 rounded-2xl border border-amber-300/20 bg-black/25 p-4 text-sm leading-7 text-amber-50">
@@ -1031,7 +1035,7 @@ export default function FrameworkBreakersAssessment() {
                 </div>
               )}
               <div className="mt-5 grid gap-2 text-sm text-stone-300">
-                {["完整循環劇本與觸發點", "關係模式、金錢卡點與自我價值盲區", "三個破框練習與七日行動指令", "對應 Skool / Notion 深度模組"].map((item) => (
+                {["你最核心的潛意識循環", "關係與情緒中的自我保護模式", "真正卡住你的執念來源", "下一階段最需要突破的方向"].map((item) => (
                   <p key={item} className="flex gap-2">
                     <CheckCircle2 className="mt-1 h-4 w-4 text-amber-200" />
                     {item}
@@ -1041,7 +1045,7 @@ export default function FrameworkBreakersAssessment() {
               <div className="mt-6 grid gap-3">
                 <Button onClick={handlePaidIntentClick} className="w-full rounded-xl bg-amber-200 py-6 text-base font-semibold text-stone-950 hover:bg-amber-100">
                   <MousePointerClick className="mr-2 h-4 w-4" />
-                  我想先看完整報告（NT$399）
+                  我想看見完整破解方式
                 </Button>
                 <Button
                   onClick={() => {
@@ -1051,14 +1055,14 @@ export default function FrameworkBreakersAssessment() {
                   variant="outline"
                   className="w-full rounded-xl border-amber-300/30 bg-transparent py-6 text-base font-semibold text-amber-100 hover:bg-amber-950/30"
                 >
-                  👉 我不想再卡住，我想直接被帶
+                  👉 我不想再自己繞圈，我想直接突破
                 </Button>
               </div>
               {paidIntentClicked === true && (
                 <div className="mt-4 rounded-xl border border-amber-300/20 bg-black/25 p-4 text-sm leading-7 text-amber-50">
                   已收到你的解鎖意願。
                   <br />
-                  完整報告正在優化中，將優先開放給願意深入轉化的人。
+                  完整破解方式正在優化中，將優先開放給願意深入理解自己的人。
                   <br />
                   你會是第一批被通知的人。
                 </div>
@@ -1067,7 +1071,7 @@ export default function FrameworkBreakersAssessment() {
                 <div className="mt-4 rounded-xl border border-red-400/20 bg-red-950/15 p-4 text-sm leading-7 text-red-100">
                   我知道你不是想再看一份分析。
                   <br />
-                  你是已經受夠一直卡在同一個地方。
+                  你是已經受夠一直在同一個地方繞圈。
                   <br />
                   👉 接下來會開放「一對一破框引導」，你會優先收到通知。
                 </div>
