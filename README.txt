@@ -1,5 +1,4 @@
 上傳方式：
-
 1. 解壓縮 ZIP
 2. 進 GitHub Repository
 3. 點 Add file → Upload files
@@ -7,17 +6,6 @@
 5. 選 Replace existing files
 6. Commit changes
 
-注意：
-這次一定要看到 GitHub 根目錄有：
-- index.html
-- package.json
-- vite.config.js
-- tailwind.config.js
-- postcss.config.js
-- src 資料夾
-
-src 裡面要有：
-- App.jsx
-- main.jsx
-- index.css
-- components/ui/
+本版更新：
+- Q6 題目已改為「你覺得自己最常敗在哪一步？」
+- 保留 Google Form 串接、Email 解鎖、雙 CTA、返回上一題與結果頁結構

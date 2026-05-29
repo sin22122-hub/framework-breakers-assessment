@@ -178,7 +178,7 @@ const painMatrix = {
   "independent-suppressor-rigidity": {
     light: "你習慣讓自己穩住，但有時候這份穩，是壓住感受換來的。",
     medium: "你不是沒有情緒，而是太早學會把它關掉。",
-    heavy: "你一直在做的，是用『我沒事』，讓所有人，連你自己，都以為你真的沒事。",
+    heavy: "你一直在做的，是用『我沒事』，讓所有人，包括你自己，都忽略你。",
   },
   "free-avoider-control": {
     light: "你很重視自由，但有些選擇你其實一直沒有真正做出來。",
@@ -266,6 +266,8 @@ const decisionMap = {
   "eruptor-rigidity": ["停止累積", "提早表達", "說出情緒"],
   "awakened-perfection": ["停止等待", "開始行動", "先做版本1"],
 };
+
+
 
 const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfgIhKyFPDMSt4NyLHWxoHqJYTz9XVylT4R90lqgZQOJj5mGw/formResponse";
 
@@ -377,7 +379,7 @@ const questions = [
   {
     id: "s2",
     stage: "第三階｜你最怕面對的是什麼",
-    title: "你最常困住自己的方式是？",
+    title: "你覺得自己最常敗在哪一步？",
     options: [
       { text: "一直拖，等更好的時機", obsession: "perfection", archetype: "awakened", weight: 5 },
       { text: "一直想，卻沒有真的行動", obsession: "control", archetype: "controller", weight: 5 },
@@ -438,7 +440,7 @@ function getIntensityInsight(score) {
   return {
     label: "開始有感｜你可能還沒承認這是一套模式",
     headline: "你不是沒事，而是你還很會替自己找理由。",
-    warning: "這個分數不代表你沒有重複，只是你可能還很會把它解釋成『只是最近比較累』或『只是這次比較特別』。",
+    warning: "這個分數不代表你沒有重複，只是你可能還很會把它解釋成「只是最近比較累」或「只是這次比較特別」。",
     paidReason: "完整報告會幫你先找出最早出現的重複點，避免等到它變成生活慣性後才想處理。",
   };
 }
@@ -499,7 +501,7 @@ function getPainLine(outerKey, topArchetype, topObsession, intensity) {
     awakened: "你以為自己已經看懂很多，但你其實還在用覺察延後真正的行動。",
   };
 
-  return fallbackByArchetype[topArchetype] || `你真正讓你一直重複的不是「${archetypes[topArchetype].name}」，而是你一直用舊方式證明自己還安全。`;
+  return fallbackByArchetype[topArchetype] || `真正讓你一直重複的不是「${archetypes[topArchetype].name}」，而是你一直用舊方式證明自己還安全。`;
 }
 
 function getIdentityGap(outerKey, topArchetype, topObsession) {
@@ -597,9 +599,9 @@ function IntensityBlock({ score, insight, futurePrediction }) {
 
   const isActiveLevel = (level) => score >= level.min && score <= level.max;
   const levelsWithPunch = [
-    { range: "0–44", min: 0, max: 44, text: "模式剛成形 → 你還在合理化", punch: "你現在還在『替自己找理由』的區間。" },
+    { range: "0–44", min: 0, max: 44, text: "模式剛成形 → 你還在替自己找理由", punch: "你現在還在「替自己找理由」的區間。" },
     { range: "45–64", min: 45, max: 64, text: "模式浮現 → 開始影響選擇", punch: "你已經在重複同一套劇本，只是還不願意承認。" },
-    { range: "65–81", min: 65, max: 81, text: "模式固定 → 你已經看見但還在重複", punch: "你在『看懂但不改』的區間。" },
+    { range: "65–81", min: 65, max: 81, text: "模式固定 → 你知道問題卻還在重複", punch: "你在『看懂但不改』的區間。" },
     { range: "82–100", min: 82, max: 100, text: "模式主導 → 已經在影響人生走向", punch: "這個模式，正在替你做決定。" },
   ];
   const active = levelsWithPunch.find(isActiveLevel) || levelsWithPunch[2];
@@ -678,7 +680,6 @@ export default function FrameworkBreakersAssessment() {
   async function submitEmailGate(event) {
     event.preventDefault();
     if (!email.includes("@") || email.trim().length < 5) return;
-
     await submitLeadToGoogleForm({
       name,
       email,
@@ -690,7 +691,6 @@ export default function FrameworkBreakersAssessment() {
       report: unlockIntent === "report" ? "想看完整破解方式" : "",
       coaching: unlockIntent === "coaching" ? "想直接一對一突破" : "",
     });
-
     setEmailUnlocked(true);
   }
 
@@ -998,8 +998,8 @@ export default function FrameworkBreakersAssessment() {
               <ul className="space-y-3 text-sm leading-7 text-stone-400">
                 <li>・外層原型：你以為你是誰</li>
                 <li>・內在原型：你其實如何保護自己</li>
-                <li>・主副執念：你最容易重複的反應</li>
-                <li>・刺痛句、重複劇本與不改變的代價</li>
+                <li>・主副執念：你卡在哪一扇門</li>
+                <li>・刺痛句、重複劇本與如果繼續這樣下去</li>
                 <li>・轉化強度：依模式集中度計算</li>
                 <li>・三個月後預言與下一步提醒</li>
                 <li>・一段今日確認語</li>
@@ -1029,7 +1029,7 @@ export default function FrameworkBreakersAssessment() {
                 </div>
               )}
               <div className="mt-5 grid gap-2 text-sm text-stone-300">
-                {["你最核心的潛意識循環", "關係與情緒中的自我保護模式", "真正卡住你的執念來源", "下一階段最需要突破的方向"].map((item) => (
+                {["完整重複劇本與觸發點", "關係與情緒中的自我保護模式", "真正讓你一直重複的原因", "下一階段最需要突破的方向"].map((item) => (
                   <p key={item} className="flex gap-2">
                     <CheckCircle2 className="mt-1 h-4 w-4 text-amber-200" />
                     {item}
