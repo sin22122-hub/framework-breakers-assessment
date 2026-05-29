@@ -10,18 +10,15 @@ import {
   RotateCcw,
   Sparkles,
   FileText,
-  ShieldCheck,
   Crown,
   DoorOpen,
   Eye,
   Flame,
   AlertTriangle,
   CheckCircle2,
-  Compass,
   KeyRound,
   Mail,
   Gift,
-  MousePointerClick,
 } from "lucide-react";
 
 const obsessions = {
@@ -89,7 +86,7 @@ const archetypes = {
     premium: "完整報告會拆解：形象依賴、認同成癮、社群表現壓力，以及真實影響力的建立。",
   },
   eruptor: {
-    name: "失序者",
+    name: "失控者",
     en: "The Eruptor",
     free: "你平常可能忍很久，但一旦超過臨界點就會爆發。這不是情緒太多，而是情緒太久沒有被聽見。",
     premium: "完整報告會拆解：爆發前兆、壓抑累積點、衝突修復方式，以及情緒能量轉化練習。",
@@ -107,10 +104,10 @@ const archetypes = {
     premium: "完整報告會拆解：空洞感來源、生命意義斷線、麻木防衛，以及重新連回渴望的書寫練習。",
   },
   awakened: {
-    name: "覺醒者",
-    en: "The Awakened",
-    free: "你已經開始看見舊模式，也知道自己不能再用舊方式活。你的課題是把覺察落地，而不是停在理解。",
-    premium: "完整報告會拆解：你的覺醒節點、轉化任務、身份重塑路徑，以及下一階段行動地圖。",
+    name: "觀察者",
+    en: "The Observer",
+    free: "你擅長看見模式、抽離觀察，也知道自己不能再用舊方式活。你的課題不是看得更清楚，而是把觀察落成選擇與行動。",
+    premium: "完整報告會拆解：你的觀察慣性、行動延遲點、身份重塑路徑，以及下一階段落地行動地圖。",
   },
 };
 
@@ -146,10 +143,10 @@ const outerArchetypes = {
     truth: "但你越好相處，越可能把自己的需要藏到沒有人看見。",
   },
   seeker: {
-    name: "覺察追尋者",
-    en: "The Conscious Seeker",
-    mask: "你以為自己已經看懂很多，也正在走向更高版本。",
-    truth: "但真正的覺醒不是理解更多，而是把看見的東西活出來。",
+    name: "觀察追尋者",
+    en: "The Observing Seeker",
+    mask: "你以為自己已經看懂很多，也能冷靜觀察自己的狀態。",
+    truth: "但真正的觀察不是停在理解，而是把看見的東西活出來。",
   },
 };
 
@@ -191,9 +188,9 @@ const painMatrix = {
     heavy: "你一直在做的，是用退讓，換取一點點被留下的可能。",
   },
   "seeker-awakened-perfection": {
-    light: "你已經開始看見很多，但還在找更好的開始方式。",
-    medium: "你一直在理解，但還沒有真的讓改變發生。",
-    heavy: "你一直在做的，是用『我知道了』，取代『我真的做了』。",
+    light: "你已經觀察到很多，但還在找更好的開始方式。",
+    medium: "你一直在觀察與理解，但還沒有真的讓改變發生。",
+    heavy: "你一直在做的，是用『我看見了』，取代『我真的做了』。",
   },
   "independent-hollow-failure": {
     light: "你看起來可以自己處理很多事，但內在其實已經有一部分失去熱度。",
@@ -215,7 +212,7 @@ const loopScripts = {
   "hollow-failure": "想開始 → 想起失敗 → 自我否定 → 失去行動力 → 沒有成果 → 再次證明自己不行。",
   "fader-humility": "想靠近 → 害怕不被選擇 → 降低需求 → 慢慢退場 → 對方更看不見你 → 你更確定自己不重要。",
   "eruptor-rigidity": "忍耐 → 壓抑 → 假裝沒事 → 累積到臨界點 → 爆發 → 後悔 → 繼續壓抑。",
-  "awakened-perfection": "看見問題 → 想做得更完整 → 遲遲不開始 → 內疚 → 再學更多 → 仍然沒有真正改變。",
+  "awakened-perfection": "看見問題 → 想觀察得更完整 → 遲遲不開始 → 內疚 → 再分析更多 → 仍然沒有真正改變。",
 };
 
 const futureCosts = {
@@ -252,8 +249,8 @@ const matrix = {
   "controller-control": "你的控制不是強勢，而是深層焦慮的外化。你越怕失控，越容易把自己與他人都逼緊。",
   "hollow-failure": "你的空洞感常來自長期挫敗後的自我斷線。不是你沒有熱情，而是你不敢再全心投入。",
   "fader-humility": "你會消失，是因為你不確定自己是否值得被留下。你需要重新確認：你的存在不需要靠討好證明。",
-  "eruptor-rigidity": "你的爆發來自長期封閉與忍耐。失序不是問題本身，而是內在太久沒有出口。",
-  "awakened-perfection": "你看見了更高版本的自己，但完美主義會讓你一直等待最好的時機。真正的覺醒，需要先行動。",
+  "eruptor-rigidity": "你的爆發來自長期封閉與忍耐。失控不是問題本身，而是內在太久沒有出口。",
+  "awakened-perfection": "你看見了更高版本的自己，但完美主義會讓你一直等待最好的時機。真正的觀察，需要落成行動。",
 };
 
 const decisionMap = {
@@ -498,7 +495,7 @@ function getPainLine(outerKey, topArchetype, topObsession, intensity) {
     fader: "你以為自己只是好相處，但你其實正在把自己的位置讓到沒有人看見。",
     hollow: "你以為自己只是累了，但你其實已經開始用無感保護自己不再失望。",
     eruptor: "你以為自己只是忍不住爆發，但你其實已經忍太久，久到情緒只能用失控表達。",
-    awakened: "你以為自己已經看懂很多，但你其實還在用覺察延後真正的行動。",
+    awakened: "你以為自己已經看懂很多，但你其實還在用觀察延後真正的行動。",
   };
 
   return fallbackByArchetype[topArchetype] || `真正讓你一直重複的不是「${archetypes[topArchetype].name}」，而是你一直用舊方式證明自己還安全。`;
@@ -515,7 +512,7 @@ function getIdentityGap(outerKey, topArchetype, topObsession) {
     "independent-suppressor-rigidity": "你一直以為自己只是成熟、冷靜、不想麻煩別人。但其實你也在用壓抑，讓自己看起來不需要任何人。",
     "free-avoider-control": "你一直以為自己只是需要空間、不喜歡被限制。但其實你也在用自由，避開那些需要承擔後果的選擇。",
     "agreeable-fader-humility": "你一直以為自己只是體貼、好相處、懂得配合。但其實你也在慢慢把自己的需求移出關係。",
-    "seeker-awakened-perfection": "你一直以為自己正在成長、正在覺察。但其實你也可能停在理解，而不是進入真正的改變。",
+    "seeker-awakened-perfection": "你一直以為自己正在成長、正在觀察。但其實你也可能停在理解，而不是進入真正的改變。",
   };
 
   return direct[`${outerKey}-${topArchetype}-${topObsession}`] || `你外在呈現的是「${outer.name}」，內在運作卻更接近「${archetype.name}」。這不是矛盾，而是你為了避開「${obsession.name}」所形成的保護方式。`;
