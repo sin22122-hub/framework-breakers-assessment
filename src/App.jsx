@@ -591,20 +591,38 @@ function ScoreBar({ label, value, max }) {
 
 function IntensityBlock({ score, insight, futurePrediction }) {
   const levels = [
-    { range: "0–44", min: 0, max: 44, text: "模式剛成形 → 你還在替自己找理由" },
-    { range: "45–64", min: 45, max: 64, text: "模式浮現 → 開始影響選擇" },
-    { range: "65–81", min: 65, max: 81, text: "模式固定 → 你知道問題卻還在重複" },
-    { range: "82–100", min: 82, max: 100, text: "模式主導 → 已經在影響人生走向" },
+    {
+      range: "0–44",
+      min: 0,
+      max: 44,
+      text: "模式剛成形 → 你還在替自己找理由",
+      punch: "你現在還在「替自己找理由」的區間。",
+    },
+    {
+      range: "45–64",
+      min: 45,
+      max: 64,
+      text: "模式浮現 → 開始影響選擇",
+      punch: "你已經在重複同一套劇本，只是還不願意承認。",
+    },
+    {
+      range: "65–81",
+      min: 65,
+      max: 81,
+      text: "模式固定 → 你知道問題卻還在重複",
+      punch: "你在『看懂但不改』的區間。",
+    },
+    {
+      range: "82–100",
+      min: 82,
+      max: 100,
+      text: "模式主導 → 已經在影響人生走向",
+      punch: "這個模式，正在替你做決定。",
+    },
   ];
 
   const isActiveLevel = (level) => score >= level.min && score <= level.max;
-  const levelsWithPunch = [
-    { range: "0–44", min: 0, max: 44, text: "模式剛成形 → 你還在替自己找理由", punch: "你現在還在「替自己找理由」的區間。" },
-    { range: "45–64", min: 45, max: 64, text: "模式浮現 → 開始影響選擇", punch: "你已經在重複同一套劇本，只是還不願意承認。" },
-    { range: "65–81", min: 65, max: 81, text: "模式固定 → 你知道問題卻還在重複", punch: "你在『看懂但不改』的區間。" },
-    { range: "82–100", min: 82, max: 100, text: "模式主導 → 已經在影響人生走向", punch: "這個模式，正在替你做決定。" },
-  ];
-  const active = levelsWithPunch.find(isActiveLevel) || levelsWithPunch[2];
+  const active = levels.find(isActiveLevel) || levels[2];
 
   return (
     <div className="rounded-2xl border border-amber-300/25 bg-gradient-to-br from-amber-950/25 to-black/20 p-6">
@@ -618,9 +636,17 @@ function IntensityBlock({ score, insight, futurePrediction }) {
       <div className="mb-5 rounded-xl border border-red-400/25 bg-red-950/15 p-4">
         <p className="text-lg font-semibold leading-8 text-red-100">{active.punch}</p>
       </div>
-      <p className="mb-5 text-sm leading-7 text-stone-400">
-        這個分數不是「好或壞」，也不是能力高低，而是代表你有多容易在壓力、關係與選擇裡，反覆走回同一套反應。分數越高，代表這套劇本越熟、越自動，也越需要被真正處理。
-      </p>
+
+      <div className="mb-5 rounded-xl border border-amber-300/15 bg-black/20 p-4">
+        <p className="mb-3 text-xs font-semibold tracking-[0.18em] text-amber-100">分數說明</p>
+        <p className="text-sm leading-7 text-stone-400">
+          這份分數看的不是你有多好或多差，而是當壓力、關係與重要選擇出現時，你有多容易回到同一套反應。
+        </p>
+        <p className="mt-3 text-sm leading-7 text-stone-400">
+          分數越高，代表這套模式越熟悉、越自動，也越容易影響你的關係、決策與人生方向。
+        </p>
+      </div>
+
       <div className="grid gap-3 text-sm leading-7">
         {levels.map((level) => (
           <div key={level.range} className={`rounded-xl border p-3 ${isActiveLevel(level) ? "border-amber-300/30 bg-amber-950/20" : "border-stone-800 bg-black/25"}`}>
@@ -628,6 +654,13 @@ function IntensityBlock({ score, insight, futurePrediction }) {
           </div>
         ))}
       </div>
+
+      <div className="mt-4 rounded-xl border border-stone-800 bg-black/20 p-4">
+        <p className="text-xs leading-6 text-stone-500">
+          註：這份測驗主要提供給想理解自己為什麼一直重複同樣問題的人，因此大部分人的結果會落在 65 分以上。分數較低不代表沒有問題，而是代表這套反應尚未形成固定慣性，或目前只出現在特定情境中。
+        </p>
+      </div>
+
       <h4 className="mt-6 text-2xl font-semibold leading-snug text-stone-50">{insight.headline}</h4>
       <p className="mt-4 text-base leading-8 text-stone-300">{insight.warning}</p>
       <div className="mt-5 rounded-xl border border-amber-300/15 bg-black/25 p-4 text-sm leading-7 text-amber-50/90">
@@ -932,11 +965,6 @@ export default function FrameworkBreakersAssessment() {
                   <p className="text-lg leading-9 text-stone-200">{result.loopScript}</p>
                 </div>
 
-                <div className="rounded-2xl border border-stone-800 bg-stone-900/60 p-5">
-                  <SectionLabel icon={Compass}>你為什麼會一直這樣</SectionLabel>
-                  <p className="text-lg leading-9 text-stone-200">{result.matrixText}</p>
-                </div>
-
                 <div className="rounded-2xl border border-amber-300/20 bg-black/20 p-5">
                   <SectionLabel icon={AlertTriangle} tone="amber">
                     如果繼續這樣下去
@@ -998,7 +1026,7 @@ export default function FrameworkBreakersAssessment() {
               <ul className="space-y-3 text-sm leading-7 text-stone-400">
                 <li>・外層原型：你以為你是誰</li>
                 <li>・內在原型：你其實如何保護自己</li>
-                <li>・主副執念：你卡在哪一扇門</li>
+                <li>・主副執念：你最容易重複的反應</li>
                 <li>・刺痛句、重複劇本與如果繼續這樣下去</li>
                 <li>・轉化強度：依模式集中度計算</li>
                 <li>・三個月後預言與下一步提醒</li>
