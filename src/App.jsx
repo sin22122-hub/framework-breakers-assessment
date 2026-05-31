@@ -949,11 +949,11 @@ function FrameworkGuidancePage() {
   const notFit = ["想快速得到標準答案", "不願意自我覺察", "希望別人替自己改變", "只想聽好話，不想面對真相"];
 
   return (
-    <div className="min-h-screen bg-[#0b0a08] text-stone-100 selection:bg-amber-200 selection:text-stone-950">
-      <header className="sticky top-0 z-40 border-b border-stone-900/80 bg-black/85 backdrop-blur-xl">
+    <div className="min-h-screen bg-[#f4ecdc] text-stone-950 selection:bg-amber-200 selection:text-stone-950">
+      <header className="sticky top-0 z-40 border-b border-stone-900/80 bg-black/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-10">
           <button onClick={() => (window.location.href = "/")} className="flex items-center gap-3 text-left">
-            <div className="grid h-10 w-10 place-items-center rounded-2xl border border-amber-300/30 bg-amber-300/10">
+            <div className="grid h-11 w-11 place-items-center rounded-2xl border border-amber-300/30 bg-amber-300/10">
               <DoorOpen className="h-5 w-5 text-amber-200" />
             </div>
             <div>
@@ -973,15 +973,16 @@ function FrameworkGuidancePage() {
         </div>
       </header>
 
-      <section className="relative overflow-hidden border-b border-stone-900 bg-[#080705] px-5 py-16 md:px-10 md:py-24">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_45%,rgba(246,213,132,0.20),transparent_22%),radial-gradient(circle_at_18%_0%,rgba(246,213,132,0.10),transparent_30%)]" />
-        <div className="absolute inset-0 opacity-35 bg-[linear-gradient(115deg,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.70)_42%,rgba(16,13,9,0.55)_100%)]" />
-        <div className="relative mx-auto grid max-w-7xl gap-12 md:grid-cols-[1.02fr_0.98fr] md:items-center">
+      <section className="relative overflow-hidden border-b border-stone-900 bg-[#080705] px-5 py-14 md:px-10 md:py-20">
+        <img src="/framework-guidance-hero.png" alt="破框引導光門" className="absolute inset-y-0 right-0 h-full w-full object-cover opacity-80 md:w-[64%]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/20" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_45%,rgba(246,213,132,0.22),transparent_22%)]" />
+        <div className="relative mx-auto grid max-w-7xl gap-10 md:grid-cols-[0.95fr_1.05fr] md:items-center">
           <div className="relative z-10">
-            <div className="mb-5 inline-flex rounded-full border border-amber-300/20 bg-black/45 px-4 py-2 text-xs font-semibold tracking-[0.22em] text-amber-100">
+            <div className="mb-5 inline-flex rounded-full border border-amber-300/20 bg-black/50 px-4 py-2 text-xs font-semibold tracking-[0.22em] text-amber-100">
               測驗結果 ＞ 破框引導
             </div>
-            <motion.h1 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="text-[2.8rem] font-semibold leading-[1.04] tracking-[-0.055em] md:text-7xl">
+            <motion.h1 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="text-[2.75rem] font-semibold leading-[1.04] tracking-[-0.055em] text-stone-50 md:text-7xl">
               你已經看見
               <br />
               自己如何運作
@@ -991,7 +992,12 @@ function FrameworkGuidancePage() {
               破框引導不是告訴你答案，而是透過 60 分鐘深度對談，幫助你看見：你的人生究竟是如何運作的。
             </p>
             <div className="mt-6 grid max-w-2xl gap-3 text-sm leading-7 text-stone-300">
-              {["完整重複劇本與觸發點", "關係與情緒中的自我保護模式", "真正讓你一直重複的原因", "下一階段需要突破的方向"].map((item) => (
+              {[
+                "完整重複劇本與觸發點",
+                "關係與情緒中的自我保護模式",
+                "真正讓你一直重複的原因",
+                "下一階段需要突破的方向",
+              ].map((item) => (
                 <p key={item} className="flex gap-2">
                   <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-amber-200" />
                   {item}
@@ -1004,7 +1010,7 @@ function FrameworkGuidancePage() {
                 ["線上 / 實體", DoorOpen],
                 ["專屬個人破框藍圖", FileText],
               ].map(([text, Icon]) => (
-                <div key={text} className="flex items-center gap-2 rounded-full border border-amber-300/20 bg-black/35 px-4 py-2">
+                <div key={text} className="flex items-center gap-2 rounded-full border border-amber-300/20 bg-black/45 px-4 py-2">
                   <Icon className="h-4 w-4 text-amber-200" />
                   {text}
                 </div>
@@ -1018,26 +1024,16 @@ function FrameworkGuidancePage() {
             </a>
           </div>
 
-          <div className="relative z-10 min-h-[480px] overflow-hidden rounded-[2.5rem] border border-amber-300/20 bg-black/55 shadow-2xl shadow-black/40">
-            <img src="/framework-guidance-hero.png" alt="破框引導光門" className="absolute inset-0 h-full w-full object-cover opacity-85" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/20 to-black/20" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_53%_43%,rgba(255,231,166,0.35),transparent_18%)]" />
-            <div className="relative z-10 flex h-full min-h-[480px] flex-col justify-end p-8">
-              <div className="max-w-sm rounded-2xl border border-amber-300/25 bg-black/55 p-6 backdrop-blur-sm">
-                <p className="text-xl font-semibold leading-9 text-amber-50">每一次破框，</p>
-                <p className="mt-2 text-xl font-semibold leading-9 text-amber-50">都始於願意誠實看見自己。</p>
-              </div>
-            </div>
-          </div>
+          <div className="relative z-10 hidden min-h-[520px] md:block" aria-hidden="true" />
         </div>
       </section>
 
-      <main className="bg-stone-50 text-stone-950">
+      <main className="bg-[#f4ecdc] text-stone-950">
         <section className="mx-auto max-w-7xl px-5 py-16 md:px-10">
           <h2 className="text-center text-3xl font-semibold tracking-[-0.04em] md:text-4xl">這不是心理測驗解說</h2>
           <div className="mt-9 grid gap-4 md:grid-cols-4">
             {notItems.map(([label, text, Icon], index) => (
-              <div key={text} className="rounded-2xl border border-stone-200 bg-white p-6 text-center shadow-sm">
+              <div key={text} className="rounded-2xl border border-stone-300/70 bg-[#eadfc9] p-6 text-center shadow-sm">
                 <div className={`mx-auto mb-4 grid h-12 w-12 place-items-center rounded-full ${index === 3 ? "bg-amber-700 text-amber-50" : "bg-stone-950 text-stone-50"}`}>
                   {index === 3 ? <CheckCircle2 className="h-5 w-5" /> : <Icon className="h-5 w-5" />}
                 </div>
@@ -1052,15 +1048,15 @@ function FrameworkGuidancePage() {
           <div className="rounded-[2rem] bg-[#0b0a08] p-6 text-stone-100 shadow-xl">
             <p className="text-center text-2xl font-semibold tracking-[-0.04em] text-amber-100">你會得到什麼</p>
             <div className="mt-6 overflow-hidden rounded-2xl border border-amber-300/20 bg-stone-950 p-4">
-              <img src="/blueprint-preview.png" alt="個人破框藍圖預覽" className="w-full rounded-xl border border-stone-800 bg-stone-100 object-cover shadow-2xl shadow-black/40" />
+              <img src="/blueprint-preview.png" alt="個人破框藍圖預覽" className="w-full rounded-xl border border-stone-800 bg-[#f4ecdc] object-cover shadow-2xl shadow-black/40" />
               <p className="mt-3 text-center text-xs leading-6 text-stone-500">會談後 24 小時內寄送一頁式 PDF</p>
             </div>
           </div>
 
           <div className="grid gap-4">
             {blueprintItems.map(([title, text, Icon]) => (
-              <div key={title} className="flex gap-4 rounded-2xl border border-stone-200 bg-white p-5 shadow-sm">
-                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-amber-700/30 bg-amber-50 text-amber-800">
+              <div key={title} className="flex gap-4 rounded-2xl border border-stone-300/70 bg-[#eadfc9] p-5 shadow-sm">
+                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-amber-700/30 bg-[#f4ecdc] text-amber-800">
                   <Icon className="h-5 w-5" />
                 </div>
                 <div>
@@ -1069,19 +1065,20 @@ function FrameworkGuidancePage() {
                 </div>
               </div>
             ))}
-            <div className="rounded-2xl border border-amber-700/20 bg-amber-50 p-5 text-sm leading-7 text-stone-700">
+            <div className="rounded-2xl border border-amber-700/20 bg-[#eadfc9] p-5 text-sm leading-7 text-stone-700">
               這份藍圖不是系統自動生成，而是根據你的測驗結果、60 分鐘對談與 Alpha 觀察共同整理。
             </div>
           </div>
         </section>
 
         <section className="mx-auto max-w-7xl px-5 pb-16 md:px-10">
-          <div className="rounded-[2rem] border border-stone-200 bg-white p-8 shadow-sm">
+          <div className="rounded-[2rem] border border-stone-300/70 bg-[#eadfc9] p-8 shadow-sm">
             <h2 className="text-center text-3xl font-semibold tracking-[-0.04em] md:text-4xl">60 分鐘會談流程</h2>
-            <div className="mt-9 grid gap-6 md:grid-cols-4">
+            <div className="relative mt-10 grid gap-8 md:grid-cols-4">
+              <div className="absolute left-[12.5%] right-[12.5%] top-8 hidden h-px bg-amber-800/35 md:block" />
               {flowItems.map(([title, text, Icon]) => (
                 <div key={title} className="relative text-center">
-                  <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-stone-950 text-amber-100 shadow-lg">
+                  <div className="relative z-10 mx-auto grid h-16 w-16 place-items-center rounded-full border border-amber-800/35 bg-stone-950 text-amber-100 shadow-lg">
                     <Icon className="h-6 w-6" />
                   </div>
                   <h3 className="mt-4 text-xl font-semibold">{title}</h3>
@@ -1093,7 +1090,7 @@ function FrameworkGuidancePage() {
         </section>
 
         <section className="mx-auto grid max-w-7xl gap-6 px-5 pb-16 md:grid-cols-2 md:px-10">
-          <div className="rounded-2xl border border-stone-200 bg-white p-7 shadow-sm">
+          <div className="rounded-2xl border border-stone-300/70 bg-[#eadfc9] p-7 shadow-sm">
             <h2 className="mb-5 text-2xl font-semibold">你可能適合破框引導</h2>
             <div className="space-y-3 text-sm leading-7 text-stone-700">
               {goodFit.map((item) => (
@@ -1101,7 +1098,7 @@ function FrameworkGuidancePage() {
               ))}
             </div>
           </div>
-          <div className="rounded-2xl border border-stone-200 bg-white p-7 shadow-sm">
+          <div className="rounded-2xl border border-stone-300/70 bg-[#eadfc9] p-7 shadow-sm">
             <h2 className="mb-5 text-2xl font-semibold">這可能不適合你</h2>
             <div className="space-y-3 text-sm leading-7 text-stone-700">
               {notFit.map((item) => (
@@ -1111,43 +1108,43 @@ function FrameworkGuidancePage() {
           </div>
         </section>
 
-        <section className="mx-auto grid max-w-7xl gap-6 px-5 pb-16 md:grid-cols-[1fr_0.9fr] md:px-10">
-          <div className="rounded-[2rem] bg-[#0b0a08] p-8 text-stone-100">
+        <section className="mx-auto grid max-w-7xl gap-6 px-5 pb-16 md:grid-cols-[0.92fr_1.08fr] md:px-10">
+          <div className="rounded-[2rem] bg-[#0b0a08] p-6 text-stone-100">
             <h2 className="text-3xl font-semibold tracking-[-0.04em] text-amber-100">服務資訊</h2>
-            <div className="mt-8 grid gap-4 sm:grid-cols-4">
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {[
                 ["時間", "60分鐘"],
                 ["形式", "線上 / 實體"],
                 ["費用", "NT$2,000"],
                 ["交付成果", "個人破框藍圖 PDF"],
               ].map(([title, text]) => (
-                <div key={title} className="rounded-2xl border border-amber-300/20 bg-black/30 p-5 text-center">
+                <div key={title} className="rounded-2xl border border-amber-300/20 bg-black/30 p-4 text-center">
                   <p className="text-xs tracking-[0.22em] text-amber-200">{title}</p>
-                  <p className="mt-3 text-lg font-semibold">{text}</p>
+                  <p className="mt-2 text-base font-semibold">{text}</p>
                 </div>
               ))}
             </div>
-            <p className="mt-5 text-sm leading-7 text-stone-400">會談後 24 小時內寄送 PDF。內容將依據測驗結果、60分鐘對談與 Alpha 觀察整理。</p>
+            <p className="mt-4 text-sm leading-7 text-stone-400">會談後 24 小時內寄送 PDF。內容將依據測驗結果、60分鐘對談與 Alpha 觀察整理。</p>
           </div>
 
-          <form id="booking" onSubmit={submitGuidanceBooking} className="rounded-[2rem] border border-stone-200 bg-white p-7 shadow-xl">
+          <form id="booking" onSubmit={submitGuidanceBooking} className="rounded-[2rem] border border-stone-300/70 bg-[#eadfc9] p-7 shadow-xl">
             <h2 className="text-2xl font-semibold tracking-[-0.03em]">預約破框引導</h2>
             <p className="mt-2 text-sm leading-7 text-stone-600">請填寫以下資訊，我會再與你確認時間。</p>
             <div className="mt-5 space-y-3">
-              <input value={bookingName} onChange={(event) => setBookingName(event.target.value)} className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none focus:border-amber-700" placeholder="姓名" />
-              <input value={bookingEmail} onChange={(event) => setBookingEmail(event.target.value)} className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none focus:border-amber-700" placeholder="Email" />
-              <input value={bookingLine} onChange={(event) => setBookingLine(event.target.value)} className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none focus:border-amber-700" placeholder="Line ID" />
-              <select value={bookingFormat} onChange={(event) => setBookingFormat(event.target.value)} className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none focus:border-amber-700">
+              <input value={bookingName} onChange={(event) => setBookingName(event.target.value)} className="w-full rounded-xl border border-stone-300 bg-[#f4ecdc] px-4 py-3 text-sm outline-none focus:border-amber-700" placeholder="姓名" />
+              <input value={bookingEmail} onChange={(event) => setBookingEmail(event.target.value)} className="w-full rounded-xl border border-stone-300 bg-[#f4ecdc] px-4 py-3 text-sm outline-none focus:border-amber-700" placeholder="Email" />
+              <input value={bookingLine} onChange={(event) => setBookingLine(event.target.value)} className="w-full rounded-xl border border-stone-300 bg-[#f4ecdc] px-4 py-3 text-sm outline-none focus:border-amber-700" placeholder="Line ID" />
+              <select value={bookingFormat} onChange={(event) => setBookingFormat(event.target.value)} className="w-full rounded-xl border border-stone-300 bg-[#f4ecdc] px-4 py-3 text-sm outline-none focus:border-amber-700">
                 <option>線上</option>
                 <option>實體</option>
                 <option>線上或實體皆可</option>
               </select>
-              <input value={bookingTime} onChange={(event) => setBookingTime(event.target.value)} className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none focus:border-amber-700" placeholder="希望時段，例如：平日晚上、週末下午" />
-              <textarea value={bookingNote} onChange={(event) => setBookingNote(event.target.value)} className="min-h-[96px] w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none focus:border-amber-700" placeholder="其他想先告訴我的事（選填）" />
+              <input value={bookingTime} onChange={(event) => setBookingTime(event.target.value)} className="w-full rounded-xl border border-stone-300 bg-[#f4ecdc] px-4 py-3 text-sm outline-none focus:border-amber-700" placeholder="希望時段，例如：平日晚上、週末下午" />
+              <textarea value={bookingNote} onChange={(event) => setBookingNote(event.target.value)} className="min-h-[96px] w-full rounded-xl border border-stone-300 bg-[#f4ecdc] px-4 py-3 text-sm outline-none focus:border-amber-700" placeholder="其他想先告訴我的事（選填）" />
             </div>
             {bookingError && <p className="mt-3 text-sm text-red-600">請至少填寫姓名與正確 Email。</p>}
             {bookingSent ? (
-              <div className="mt-5 rounded-xl border border-amber-700/20 bg-amber-50 p-4 text-sm leading-7 text-stone-700">
+              <div className="mt-5 rounded-xl border border-amber-700/20 bg-[#f4ecdc] p-4 text-sm leading-7 text-stone-700">
                 已收到你的預約資料。我會再與你確認可預約時段。
               </div>
             ) : (
