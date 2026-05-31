@@ -881,7 +881,335 @@ function IntensityBlock({ score, insight, futurePrediction }) {
   );
 }
 
-export default function FrameworkBreakersAssessment() {
+
+function FrameworkGuidancePage() {
+  const [bookingName, setBookingName] = useState("");
+  const [bookingEmail, setBookingEmail] = useState("");
+  const [bookingLine, setBookingLine] = useState("");
+  const [bookingFormat, setBookingFormat] = useState("線上");
+  const [bookingTime, setBookingTime] = useState("");
+  const [bookingNote, setBookingNote] = useState("");
+  const [bookingSent, setBookingSent] = useState(false);
+  const [bookingError, setBookingError] = useState(false);
+
+  function goBackToResult() {
+    if (typeof window !== "undefined" && window.history.length > 1) {
+      window.history.back();
+      return;
+    }
+    if (typeof window !== "undefined") window.location.href = "/";
+  }
+
+  async function submitGuidanceBooking(event) {
+    event.preventDefault();
+    setBookingError(false);
+    if (!bookingName.trim() || !bookingEmail.includes("@") || bookingEmail.trim().length < 5) {
+      setBookingError(true);
+      return;
+    }
+
+    await submitLeadToGoogleForm({
+      name: bookingName,
+      email: bookingEmail,
+      outer: "破框引導頁",
+      inner: "Framework Guidance",
+      main: "破框引導預約",
+      second: `形式:${bookingFormat || "未填"}｜時段:${bookingTime || "未填"}`,
+      intensity: "",
+      report: "",
+      coaching: `破框引導預約｜LINE:${bookingLine || "未填"}｜形式:${bookingFormat || "未填"}｜希望時段:${bookingTime || "未填"}｜補充:${bookingNote || "未填"}`,
+    });
+
+    setBookingSent(true);
+  }
+
+  const notItems = [
+    ["不是", "心理測驗解析"],
+    ["不是", "心靈雞湯"],
+    ["不是", "快速給答案"],
+    ["而是", "一起拆解你的人生模式"],
+  ];
+
+  const blueprintItems = [
+    ["Alpha 觀察", "看見的不是你的問題，而是你的模式。"],
+    ["現實中的保護模式", "從工作、關係、情緒三個面向，看見你如何保護自己。"],
+    ["當前課題", "找出你真正需要練習、突破的關鍵課題。"],
+    ["下一步建議", "具體的停止、選擇、行動練習，幫助你開始改變。"],
+  ];
+
+  const flowItems = [
+    ["看見", "你如何運作"],
+    ["拆解", "你的保護機制"],
+    ["理解", "執念與模式"],
+    ["建立藍圖", "下一步方向"],
+  ];
+
+  const goodFit = ["常常重複同樣的問題", "明知道問題在哪卻改不了", "覺得測驗很準，有被說中的感覺", "願意誠實看見自己", "想開始改變但不知道從哪裡開始"];
+  const notFit = ["想快速得到標準答案", "不願意自我覺察", "希望別人替自己改變", "只想聽好話，不想面對真相"];
+
+  return (
+    <div className="min-h-screen bg-[#0b0a08] text-stone-100 selection:bg-amber-200 selection:text-stone-950">
+      <header className="sticky top-0 z-40 border-b border-stone-900/80 bg-black/80 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-10">
+          <button onClick={() => (window.location.href = "/")} className="flex items-center gap-3 text-left">
+            <div className="grid h-10 w-10 place-items-center rounded-2xl border border-amber-300/30 bg-amber-300/10">
+              <DoorOpen className="h-5 w-5 text-amber-200" />
+            </div>
+            <div>
+              <p className="text-xs font-semibold tracking-[0.26em] text-amber-100">FRAMEWORK</p>
+              <p className="text-xs font-semibold tracking-[0.26em] text-amber-100">BREAKERS</p>
+            </div>
+          </button>
+          <nav className="hidden items-center gap-7 text-xs font-medium tracking-[0.2em] text-stone-400 md:flex">
+            <button onClick={() => (window.location.href = "/")} className="hover:text-amber-100">測驗</button>
+            <span className="text-amber-100">破框引導</span>
+            <span className="opacity-60">破框重塑</span>
+            <span className="opacity-60">回心之途</span>
+          </nav>
+          <Button onClick={goBackToResult} className="rounded-xl bg-amber-200 px-5 py-2 text-sm font-semibold text-stone-950 hover:bg-amber-100">
+            回到我的結果
+          </Button>
+        </div>
+      </header>
+
+      <section className="relative overflow-hidden border-b border-stone-900 px-5 py-16 md:px-10 md:py-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_36%,rgba(246,213,132,0.22),transparent_26%),radial-gradient(circle_at_20%_0%,rgba(246,213,132,0.12),transparent_32%)]" />
+        <div className="absolute right-0 top-0 h-full w-full opacity-40 bg-[linear-gradient(115deg,transparent_0%,transparent_46%,rgba(214,181,111,0.08)_47%,rgba(214,181,111,0.02)_100%)]" />
+        <div className="relative mx-auto grid max-w-7xl gap-12 md:grid-cols-[1.02fr_0.98fr] md:items-center">
+          <div>
+            <div className="mb-5 inline-flex rounded-full border border-amber-300/20 bg-black/45 px-4 py-2 text-xs font-semibold tracking-[0.22em] text-amber-100">
+              破框八問 ＞ 測驗結果 ＞ 破框引導
+            </div>
+            <motion.h1 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="text-[2.8rem] font-semibold leading-[1.04] tracking-[-0.055em] md:text-7xl">
+              你已經看見
+              <br />
+              自己如何運作
+            </motion.h1>
+            <p className="mt-4 text-xl font-medium leading-9 text-amber-100 md:text-2xl">但真正的改變，從理解這些模式開始。</p>
+            <p className="mt-6 max-w-2xl text-base leading-8 text-stone-300 md:text-lg">
+              破框引導不是告訴你答案，而是透過 60 分鐘深度對談，幫助你看見：你的人生究竟是如何運作的。
+            </p>
+            <div className="mt-6 grid max-w-2xl gap-3 text-sm leading-7 text-stone-300">
+              {["完整重複劇本與觸發點", "關係與情緒中的自我保護模式", "真正讓你一直重複的原因", "下一階段需要突破的方向"].map((item) => (
+                <p key={item} className="flex gap-2">
+                  <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-amber-200" />
+                  {item}
+                </p>
+              ))}
+            </div>
+            <div className="mt-8 flex flex-wrap gap-3 text-sm text-amber-50/90">
+              {[
+                ["60分鐘深度引導", Eye],
+                ["線上 / 實體", DoorOpen],
+                ["專屬個人破框藍圖", FileText],
+              ].map(([text, Icon]) => (
+                <div key={text} className="flex items-center gap-2 rounded-full border border-amber-300/20 bg-black/35 px-4 py-2">
+                  <Icon className="h-4 w-4 text-amber-200" />
+                  {text}
+                </div>
+              ))}
+            </div>
+            <a href="#booking" className="mt-8 inline-block">
+              <Button className="rounded-xl bg-amber-200 px-8 py-6 text-base font-semibold text-stone-950 hover:bg-amber-100">
+                預約破框引導
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </a>
+          </div>
+
+          <div className="relative min-h-[460px] overflow-hidden rounded-[2.5rem] border border-amber-300/20 bg-black/55 p-8 shadow-2xl shadow-black/40">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,rgba(255,226,159,0.42),transparent_17%),radial-gradient(circle_at_50%_42%,rgba(255,226,159,0.15),transparent_34%)]" />
+            <div className="absolute bottom-0 left-1/2 h-[75%] w-[55%] -translate-x-1/2 rounded-t-full border border-amber-200/40 bg-gradient-to-b from-amber-100/10 to-transparent" />
+            <div className="absolute bottom-0 left-1/2 h-[55%] w-px -translate-x-1/2 bg-gradient-to-t from-amber-100/60 to-transparent" />
+            <div className="absolute bottom-10 left-1/2 h-44 w-52 -translate-x-1/2 rounded-[50%] border border-amber-200/20 bg-black/25 blur-sm" />
+            <div className="relative z-10 flex h-full min-h-[410px] flex-col justify-end">
+              <div className="rounded-2xl border border-amber-300/20 bg-black/45 p-6 backdrop-blur-sm">
+                <p className="text-xl font-semibold leading-9 text-amber-50">每一次破框，</p>
+                <p className="mt-2 text-xl font-semibold leading-9 text-amber-50">都始於願意誠實看見自己。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <main className="bg-stone-50 text-stone-950">
+        <section className="mx-auto max-w-7xl px-5 py-16 md:px-10">
+          <h2 className="text-center text-3xl font-semibold tracking-[-0.04em] md:text-4xl">這不是心理測驗解說</h2>
+          <div className="mt-9 grid gap-4 md:grid-cols-4">
+            {notItems.map(([label, text], index) => (
+              <div key={text} className="rounded-2xl border border-stone-200 bg-white p-6 text-center shadow-sm">
+                <div className={`mx-auto mb-4 grid h-11 w-11 place-items-center rounded-full ${index === 3 ? "bg-amber-700 text-amber-50" : "bg-stone-950 text-stone-50"}`}>
+                  {index === 3 ? <CheckCircle2 className="h-5 w-5" /> : <span className="text-xl">×</span>}
+                </div>
+                <p className="text-sm text-stone-500">{label}</p>
+                <p className="mt-1 text-lg font-semibold">{text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mx-auto grid max-w-7xl gap-8 px-5 pb-16 md:grid-cols-[0.9fr_1.1fr] md:px-10">
+          <div className="rounded-[2rem] bg-[#0b0a08] p-6 text-stone-100 shadow-xl">
+            <p className="text-center text-2xl font-semibold tracking-[-0.04em] text-amber-100">你會得到什麼</p>
+            <div className="mt-6 rounded-2xl border border-amber-300/20 bg-stone-950 p-5">
+              <div className="rounded-xl border border-stone-800 bg-stone-900/80 p-5">
+                <p className="text-xs font-semibold tracking-[0.22em] text-amber-200">PERSONAL FRAMEWORK BLUEPRINT</p>
+                <h3 className="mt-3 text-3xl font-semibold">個人破框藍圖</h3>
+                <p className="mt-4 text-sm leading-7 text-stone-400">
+                  會談後 24 小時內寄送一頁式 PDF。它不是系統自動生成，而是根據測驗結果、60 分鐘對談與 Alpha 觀察共同整理。
+                </p>
+                <div className="mt-5 grid grid-cols-2 gap-3 text-xs text-stone-300">
+                  {['目前的位置','Alpha觀察','保護模式','當前課題','下一步建議','下一扇門'].map((item) => (
+                    <div key={item} className="rounded-xl border border-stone-800 bg-black/30 p-3">{item}</div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid gap-4">
+            {blueprintItems.map(([title, text], index) => (
+              <div key={title} className="flex gap-4 rounded-2xl border border-stone-200 bg-white p-5 shadow-sm">
+                <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-amber-700/30 bg-amber-50 text-amber-800">
+                  {index === 0 ? <Eye className="h-5 w-5" /> : index === 1 ? <Lock className="h-5 w-5" /> : index === 2 ? <KeyRound className="h-5 w-5" /> : <ArrowRight className="h-5 w-5" />}
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold">{title}</h3>
+                  <p className="mt-2 text-sm leading-7 text-stone-600">{text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-5 pb-16 md:px-10">
+          <div className="rounded-[2rem] border border-stone-200 bg-white p-8 shadow-sm">
+            <h2 className="text-center text-3xl font-semibold tracking-[-0.04em] md:text-4xl">60 分鐘會談流程</h2>
+            <div className="mt-9 grid gap-6 md:grid-cols-4">
+              {flowItems.map(([title, text], index) => (
+                <div key={title} className="relative text-center">
+                  <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-stone-950 text-amber-100 shadow-lg">
+                    {index === 0 ? <Eye className="h-6 w-6" /> : index === 1 ? <Sparkles className="h-6 w-6" /> : index === 2 ? <Flame className="h-6 w-6" /> : <FileText className="h-6 w-6" />}
+                  </div>
+                  <h3 className="mt-4 text-xl font-semibold">{title}</h3>
+                  <p className="mt-2 text-sm text-stone-600">{text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto grid max-w-7xl gap-6 px-5 pb-16 md:grid-cols-2 md:px-10">
+          <div className="rounded-2xl border border-stone-200 bg-white p-7 shadow-sm">
+            <h2 className="mb-5 text-2xl font-semibold">你可能適合破框引導</h2>
+            <div className="space-y-3 text-sm leading-7 text-stone-700">
+              {goodFit.map((item) => (
+                <p key={item} className="flex gap-2"><CheckCircle2 className="mt-1 h-4 w-4 text-amber-700" />{item}</p>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-2xl border border-stone-200 bg-white p-7 shadow-sm">
+            <h2 className="mb-5 text-2xl font-semibold">這可能不適合你</h2>
+            <div className="space-y-3 text-sm leading-7 text-stone-700">
+              {notFit.map((item) => (
+                <p key={item} className="flex gap-2"><span className="mt-0.5 text-lg text-stone-400">×</span>{item}</p>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto grid max-w-7xl gap-6 px-5 pb-16 md:grid-cols-[1fr_0.9fr] md:px-10">
+          <div className="rounded-[2rem] bg-[#0b0a08] p-8 text-stone-100">
+            <h2 className="text-3xl font-semibold tracking-[-0.04em] text-amber-100">服務資訊</h2>
+            <div className="mt-8 grid gap-4 sm:grid-cols-4">
+              {[
+                ["時間", "60分鐘"],
+                ["形式", "線上 / 實體"],
+                ["費用", "NT$2,000"],
+                ["交付成果", "個人破框藍圖 PDF"],
+              ].map(([title, text]) => (
+                <div key={title} className="rounded-2xl border border-amber-300/20 bg-black/30 p-5 text-center">
+                  <p className="text-xs tracking-[0.22em] text-amber-200">{title}</p>
+                  <p className="mt-3 text-lg font-semibold">{text}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-5 text-sm leading-7 text-stone-400">會談後 24 小時內寄送 PDF。內容將依據測驗結果、60分鐘對談與 Alpha 觀察整理。</p>
+          </div>
+
+          <form id="booking" onSubmit={submitGuidanceBooking} className="rounded-[2rem] border border-stone-200 bg-white p-7 shadow-xl">
+            <h2 className="text-2xl font-semibold tracking-[-0.03em]">預約破框引導</h2>
+            <p className="mt-2 text-sm leading-7 text-stone-600">請填寫以下資訊，我會再與你確認時間。</p>
+            <div className="mt-5 space-y-3">
+              <input value={bookingName} onChange={(event) => setBookingName(event.target.value)} className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none focus:border-amber-700" placeholder="姓名" />
+              <input value={bookingEmail} onChange={(event) => setBookingEmail(event.target.value)} className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none focus:border-amber-700" placeholder="Email" />
+              <input value={bookingLine} onChange={(event) => setBookingLine(event.target.value)} className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none focus:border-amber-700" placeholder="Line ID" />
+              <select value={bookingFormat} onChange={(event) => setBookingFormat(event.target.value)} className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none focus:border-amber-700">
+                <option>線上</option>
+                <option>實體</option>
+                <option>線上或實體皆可</option>
+              </select>
+              <input value={bookingTime} onChange={(event) => setBookingTime(event.target.value)} className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none focus:border-amber-700" placeholder="希望時段，例如：平日晚上、週末下午" />
+              <textarea value={bookingNote} onChange={(event) => setBookingNote(event.target.value)} className="min-h-[96px] w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none focus:border-amber-700" placeholder="其他想先告訴我的事（選填）" />
+            </div>
+            {bookingError && <p className="mt-3 text-sm text-red-600">請至少填寫姓名與正確 Email。</p>}
+            {bookingSent ? (
+              <div className="mt-5 rounded-xl border border-amber-700/20 bg-amber-50 p-4 text-sm leading-7 text-stone-700">
+                已收到你的預約資料。我會再與你確認可預約時段。
+              </div>
+            ) : (
+              <Button type="submit" className="mt-5 w-full rounded-xl bg-stone-950 py-6 text-base font-semibold text-amber-100 hover:bg-stone-800">
+                送出預約
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            )}
+            <p className="mt-3 text-xs leading-6 text-stone-500">你的資料只用於預約與聯繫，我會妥善保護你的隱私。</p>
+          </form>
+        </section>
+
+        <section className="bg-[#0b0a08] px-5 py-16 text-stone-100 md:px-10">
+          <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+            <div className="relative min-h-[260px] overflow-hidden rounded-[2rem] border border-amber-300/20 bg-black/60 p-8">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_34%_55%,rgba(255,226,159,0.33),transparent_21%)]" />
+              <div className="relative z-10">
+                <SectionLabel icon={KeyRound} tone="amber">下一扇門</SectionLabel>
+                <h2 className="text-3xl font-semibold tracking-[-0.04em]">第二層｜破框重塑</h2>
+                <p className="mt-5 max-w-xl text-base leading-8 text-stone-300">
+                  你已經知道自己如何運作，但還不知道：為什麼會形成這個模式。這將會在第二層開始展開。
+                </p>
+              </div>
+            </div>
+            <div className="grid gap-3 text-sm leading-7 text-stone-300">
+              {["執念根源", "保護機制", "潛意識角色", "人生劇本形成原因"].map((item) => (
+                <p key={item} className="flex gap-2"><CheckCircle2 className="mt-1 h-4 w-4 text-amber-200" />{item}</p>
+              ))}
+              <Button variant="outline" className="mt-3 w-fit rounded-xl border-amber-300/30 bg-transparent px-6 py-5 text-amber-100 hover:bg-amber-950/30">
+                了解破框重塑（即將開放）
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#0b0a08] px-5 pb-20 text-stone-100 md:px-10">
+          <div className="mx-auto flex max-w-7xl flex-col gap-6 rounded-[2rem] border border-amber-300/20 bg-gradient-to-r from-black to-amber-950/20 p-8 md:flex-row md:items-center md:justify-between">
+            <div>
+              <h2 className="text-3xl font-semibold tracking-[-0.04em]">改變人生，不是找到新的方法。</h2>
+              <p className="mt-3 text-lg leading-8 text-stone-300">而是停止重複舊的模式。</p>
+            </div>
+            <a href="#booking">
+              <Button className="rounded-xl bg-amber-200 px-8 py-6 text-base font-semibold text-stone-950 hover:bg-amber-100">
+                預約破框引導
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </a>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
+
+function FrameworkBreakersAssessment() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState({});
   const [email, setEmail] = useState("");
@@ -1276,7 +1604,6 @@ export default function FrameworkBreakersAssessment() {
                 <Button
                   onClick={async () => {
                     console.log("coaching_intent_clicked");
-                    setPaidIntentClicked("coaching");
                     await submitLeadToGoogleForm({
                       name,
                       email,
@@ -1286,8 +1613,9 @@ export default function FrameworkBreakersAssessment() {
                       second: secondObsession.name,
                       intensity: result.intensity,
                       report: "",
-                      coaching: "點擊一對一突破",
+                      coaching: "點擊破框引導頁",
                     });
+                    window.location.href = "/framework-guidance";
                   }}
                   variant="outline"
                   className="w-full rounded-xl border-amber-300/30 bg-transparent py-6 text-base font-semibold text-amber-100 hover:bg-amber-950/30"
@@ -1320,3 +1648,10 @@ export default function FrameworkBreakersAssessment() {
     </div>
   );
 }
+
+export default function App() {
+  const path = typeof window !== "undefined" ? window.location.pathname.replace(/\/$/, "") : "";
+  if (path === "/framework-guidance") return <FrameworkGuidancePage />;
+  return <FrameworkBreakersAssessment />;
+}
+
