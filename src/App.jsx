@@ -948,18 +948,17 @@ function FrameworkGuidancePage() {
   const goodFit = ["常常重複同樣的問題", "明知道問題在哪卻改不了", "覺得測驗很準，有被說中的感覺", "願意誠實看見自己", "想開始改變但不知道從哪裡開始"];
   const notFit = ["想快速得到標準答案", "不願意自我覺察", "希望別人替自己改變", "只想聽好話，不想面對真相"];
 
+  const creamBg = "bg-[#e7dfd3]";
+  const creamCard = "bg-[#f1eadf]";
+  const creamDeep = "bg-[#e0d4c4]";
+  const borderSoft = "border-[#cfc1ab]";
+
   return (
-    <div className="min-h-screen bg-[#f4ecdc] text-stone-950 selection:bg-amber-200 selection:text-stone-950">
-      <header className="sticky top-0 z-40 border-b border-stone-900/80 bg-black/90 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-10">
+    <div className={`min-h-screen ${creamBg} text-stone-950 selection:bg-amber-200 selection:text-stone-950`}>
+      <header className="sticky top-0 z-40 border-b border-stone-900/80 bg-black/92 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 md:px-10">
           <button onClick={() => (window.location.href = "/")} className="flex items-center gap-3 text-left">
-            <div className="grid h-11 w-11 place-items-center rounded-2xl border border-amber-300/30 bg-amber-300/10">
-              <DoorOpen className="h-5 w-5 text-amber-200" />
-            </div>
-            <div>
-              <p className="text-xs font-semibold tracking-[0.26em] text-amber-100">FRAMEWORK</p>
-              <p className="text-xs font-semibold tracking-[0.26em] text-amber-100">BREAKERS</p>
-            </div>
+            <img src="/framework-logo.png" alt="Framework Breakers" className="h-16 w-auto object-contain" />
           </button>
           <nav className="hidden items-center gap-7 text-xs font-medium tracking-[0.2em] text-stone-400 md:flex">
             <button onClick={() => (window.location.href = "/")} className="hover:text-amber-100">測驗</button>
@@ -974,10 +973,10 @@ function FrameworkGuidancePage() {
       </header>
 
       <section className="relative overflow-hidden border-b border-stone-900 bg-[#080705] px-5 py-14 md:px-10 md:py-20">
-        <img src="/framework-guidance-hero.png" alt="破框引導光門" className="absolute inset-y-0 right-0 h-full w-full object-cover opacity-80 md:w-[64%]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/20" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_45%,rgba(246,213,132,0.22),transparent_22%)]" />
-        <div className="relative mx-auto grid max-w-7xl gap-10 md:grid-cols-[0.95fr_1.05fr] md:items-center">
+        <img src="/framework-guidance-hero.png" alt="破框引導光門" className="absolute inset-y-0 right-0 hidden h-full w-[61%] object-cover object-center opacity-95 md:block" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/72 to-black/5" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_45%,rgba(246,213,132,0.18),transparent_26%)]" />
+        <div className="relative mx-auto grid max-w-7xl gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
           <div className="relative z-10">
             <div className="mb-5 inline-flex rounded-full border border-amber-300/20 bg-black/50 px-4 py-2 text-xs font-semibold tracking-[0.22em] text-amber-100">
               測驗結果 ＞ 破框引導
@@ -1023,17 +1022,16 @@ function FrameworkGuidancePage() {
               </Button>
             </a>
           </div>
-
           <div className="relative z-10 hidden min-h-[520px] md:block" aria-hidden="true" />
         </div>
       </section>
 
-      <main className="bg-[#f4ecdc] text-stone-950">
+      <main className={`${creamBg} text-stone-950`}>
         <section className="mx-auto max-w-7xl px-5 py-16 md:px-10">
           <h2 className="text-center text-3xl font-semibold tracking-[-0.04em] md:text-4xl">這不是心理測驗解說</h2>
           <div className="mt-9 grid gap-4 md:grid-cols-4">
             {notItems.map(([label, text, Icon], index) => (
-              <div key={text} className="rounded-2xl border border-stone-300/70 bg-[#eadfc9] p-6 text-center shadow-sm">
+              <div key={text} className={`rounded-2xl border ${borderSoft} ${creamCard} p-6 text-center shadow-sm`}>
                 <div className={`mx-auto mb-4 grid h-12 w-12 place-items-center rounded-full ${index === 3 ? "bg-amber-700 text-amber-50" : "bg-stone-950 text-stone-50"}`}>
                   {index === 3 ? <CheckCircle2 className="h-5 w-5" /> : <Icon className="h-5 w-5" />}
                 </div>
@@ -1044,19 +1042,19 @@ function FrameworkGuidancePage() {
           </div>
         </section>
 
-        <section className="mx-auto grid max-w-7xl gap-8 px-5 pb-16 md:grid-cols-[0.92fr_1.08fr] md:px-10">
-          <div className="rounded-[2rem] bg-[#0b0a08] p-6 text-stone-100 shadow-xl">
-            <p className="text-center text-2xl font-semibold tracking-[-0.04em] text-amber-100">你會得到什麼</p>
+        <section className="mx-auto grid max-w-7xl gap-8 px-5 pb-16 md:grid-cols-[0.9fr_0.75fr_0.65fr] md:px-10">
+          <div className="rounded-[1.75rem] bg-[#0b0a08] p-6 text-stone-100 shadow-xl md:row-span-2">
+            <h2 className="text-2xl font-semibold tracking-[-0.04em] text-amber-100">你會得到什麼</h2>
             <div className="mt-6 overflow-hidden rounded-2xl border border-amber-300/20 bg-stone-950 p-4">
-              <img src="/blueprint-preview.png" alt="個人破框藍圖預覽" className="w-full rounded-xl border border-stone-800 bg-[#f4ecdc] object-cover shadow-2xl shadow-black/40" />
+              <img src="/blueprint-preview.png" alt="個人破框藍圖預覽" className="w-full rounded-xl border border-stone-800 bg-[#e7dfd3] object-cover shadow-2xl shadow-black/40" />
               <p className="mt-3 text-center text-xs leading-6 text-stone-500">會談後 24 小時內寄送一頁式 PDF</p>
             </div>
           </div>
 
           <div className="grid gap-4">
             {blueprintItems.map(([title, text, Icon]) => (
-              <div key={title} className="flex gap-4 rounded-2xl border border-stone-300/70 bg-[#eadfc9] p-5 shadow-sm">
-                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-amber-700/30 bg-[#f4ecdc] text-amber-800">
+              <div key={title} className={`flex gap-4 rounded-2xl border ${borderSoft} ${creamCard} p-5 shadow-sm`}>
+                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-amber-700/30 bg-[#e7dfd3] text-amber-800">
                   <Icon className="h-5 w-5" />
                 </div>
                 <div>
@@ -1065,20 +1063,49 @@ function FrameworkGuidancePage() {
                 </div>
               </div>
             ))}
-            <div className="rounded-2xl border border-amber-700/20 bg-[#eadfc9] p-5 text-sm leading-7 text-stone-700">
+            <div className={`rounded-2xl border border-amber-700/20 ${creamDeep} p-5 text-sm leading-7 text-stone-700`}>
               這份藍圖不是系統自動生成，而是根據你的測驗結果、60 分鐘對談與 Alpha 觀察共同整理。
             </div>
           </div>
+
+          <form id="booking" onSubmit={submitGuidanceBooking} className="rounded-[1.75rem] border border-stone-900/10 bg-[#0b0a08] p-6 text-stone-100 shadow-xl md:row-span-2">
+            <h2 className="text-2xl font-semibold tracking-[-0.03em] text-amber-100">預約破框引導</h2>
+            <p className="mt-2 text-sm leading-7 text-stone-400">請填寫以下資訊，我會再與你確認時間。</p>
+            <div className="mt-5 space-y-3">
+              <input value={bookingName} onChange={(event) => setBookingName(event.target.value)} className="w-full rounded-xl border border-stone-700 bg-black/30 px-4 py-3 text-sm text-stone-100 outline-none placeholder:text-stone-500 focus:border-amber-300/60" placeholder="姓名" />
+              <input value={bookingEmail} onChange={(event) => setBookingEmail(event.target.value)} className="w-full rounded-xl border border-stone-700 bg-black/30 px-4 py-3 text-sm text-stone-100 outline-none placeholder:text-stone-500 focus:border-amber-300/60" placeholder="Email" />
+              <input value={bookingLine} onChange={(event) => setBookingLine(event.target.value)} className="w-full rounded-xl border border-stone-700 bg-black/30 px-4 py-3 text-sm text-stone-100 outline-none placeholder:text-stone-500 focus:border-amber-300/60" placeholder="Line ID" />
+              <select value={bookingFormat} onChange={(event) => setBookingFormat(event.target.value)} className="w-full rounded-xl border border-stone-700 bg-black/30 px-4 py-3 text-sm text-stone-100 outline-none focus:border-amber-300/60">
+                <option>線上</option>
+                <option>實體</option>
+                <option>線上或實體皆可</option>
+              </select>
+              <input value={bookingTime} onChange={(event) => setBookingTime(event.target.value)} className="w-full rounded-xl border border-stone-700 bg-black/30 px-4 py-3 text-sm text-stone-100 outline-none placeholder:text-stone-500 focus:border-amber-300/60" placeholder="希望時段，例如：平日晚上、週末下午" />
+              <textarea value={bookingNote} onChange={(event) => setBookingNote(event.target.value)} className="min-h-[96px] w-full rounded-xl border border-stone-700 bg-black/30 px-4 py-3 text-sm text-stone-100 outline-none placeholder:text-stone-500 focus:border-amber-300/60" placeholder="其他想先告訴我的事（選填）" />
+            </div>
+            {bookingError && <p className="mt-3 text-sm text-red-300">請至少填寫姓名與正確 Email。</p>}
+            {bookingSent ? (
+              <div className="mt-5 rounded-xl border border-amber-300/20 bg-amber-950/20 p-4 text-sm leading-7 text-amber-50">
+                已收到你的預約資料。我會再與你確認可預約時段。
+              </div>
+            ) : (
+              <Button type="submit" className="mt-5 w-full rounded-xl bg-amber-200 py-6 text-base font-semibold text-stone-950 hover:bg-amber-100">
+                送出預約
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            )}
+            <p className="mt-3 text-xs leading-6 text-stone-500">你的資料只用於預約與聯繫，我會妥善保護你的隱私。</p>
+          </form>
         </section>
 
         <section className="mx-auto max-w-7xl px-5 pb-16 md:px-10">
-          <div className="rounded-[2rem] border border-stone-300/70 bg-[#eadfc9] p-8 shadow-sm">
+          <div className={`rounded-[1.75rem] border ${borderSoft} ${creamCard} p-8 shadow-sm`}>
             <h2 className="text-center text-3xl font-semibold tracking-[-0.04em] md:text-4xl">60 分鐘會談流程</h2>
             <div className="relative mt-10 grid gap-8 md:grid-cols-4">
-              <div className="absolute left-[12.5%] right-[12.5%] top-8 hidden h-px bg-amber-800/35 md:block" />
+              <div className="absolute left-[12.5%] right-[12.5%] top-8 hidden h-px bg-amber-800/40 md:block" />
               {flowItems.map(([title, text, Icon]) => (
                 <div key={title} className="relative text-center">
-                  <div className="relative z-10 mx-auto grid h-16 w-16 place-items-center rounded-full border border-amber-800/35 bg-stone-950 text-amber-100 shadow-lg">
+                  <div className="relative z-10 mx-auto grid h-16 w-16 place-items-center rounded-full border border-amber-800/40 bg-stone-950 text-amber-100 shadow-lg">
                     <Icon className="h-6 w-6" />
                   </div>
                   <h3 className="mt-4 text-xl font-semibold">{title}</h3>
@@ -1089,8 +1116,8 @@ function FrameworkGuidancePage() {
           </div>
         </section>
 
-        <section className="mx-auto grid max-w-7xl gap-6 px-5 pb-16 md:grid-cols-2 md:px-10">
-          <div className="rounded-2xl border border-stone-300/70 bg-[#eadfc9] p-7 shadow-sm">
+        <section className="mx-auto grid max-w-7xl gap-6 px-5 pb-16 md:grid-cols-[0.9fr_0.9fr_1.2fr] md:px-10">
+          <div className={`rounded-2xl border ${borderSoft} ${creamCard} p-7 shadow-sm`}>
             <h2 className="mb-5 text-2xl font-semibold">你可能適合破框引導</h2>
             <div className="space-y-3 text-sm leading-7 text-stone-700">
               {goodFit.map((item) => (
@@ -1098,7 +1125,7 @@ function FrameworkGuidancePage() {
               ))}
             </div>
           </div>
-          <div className="rounded-2xl border border-stone-300/70 bg-[#eadfc9] p-7 shadow-sm">
+          <div className={`rounded-2xl border ${borderSoft} ${creamCard} p-7 shadow-sm`}>
             <h2 className="mb-5 text-2xl font-semibold">這可能不適合你</h2>
             <div className="space-y-3 text-sm leading-7 text-stone-700">
               {notFit.map((item) => (
@@ -1106,12 +1133,9 @@ function FrameworkGuidancePage() {
               ))}
             </div>
           </div>
-        </section>
-
-        <section className="mx-auto grid max-w-7xl gap-6 px-5 pb-16 md:grid-cols-[0.92fr_1.08fr] md:px-10">
-          <div className="rounded-[2rem] bg-[#0b0a08] p-6 text-stone-100">
-            <h2 className="text-3xl font-semibold tracking-[-0.04em] text-amber-100">服務資訊</h2>
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+          <div className="rounded-2xl bg-[#0b0a08] p-7 text-stone-100 shadow-xl">
+            <h2 className="mb-5 text-2xl font-semibold text-amber-100">服務資訊</h2>
+            <div className="grid grid-cols-2 gap-3">
               {[
                 ["時間", "60分鐘"],
                 ["形式", "線上 / 實體"],
@@ -1124,44 +1148,15 @@ function FrameworkGuidancePage() {
                 </div>
               ))}
             </div>
-            <p className="mt-4 text-sm leading-7 text-stone-400">會談後 24 小時內寄送 PDF。內容將依據測驗結果、60分鐘對談與 Alpha 觀察整理。</p>
+            <p className="mt-4 text-sm leading-7 text-stone-400">會談後 24 小時內寄送 PDF。</p>
           </div>
-
-          <form id="booking" onSubmit={submitGuidanceBooking} className="rounded-[2rem] border border-stone-300/70 bg-[#eadfc9] p-7 shadow-xl">
-            <h2 className="text-2xl font-semibold tracking-[-0.03em]">預約破框引導</h2>
-            <p className="mt-2 text-sm leading-7 text-stone-600">請填寫以下資訊，我會再與你確認時間。</p>
-            <div className="mt-5 space-y-3">
-              <input value={bookingName} onChange={(event) => setBookingName(event.target.value)} className="w-full rounded-xl border border-stone-300 bg-[#f4ecdc] px-4 py-3 text-sm outline-none focus:border-amber-700" placeholder="姓名" />
-              <input value={bookingEmail} onChange={(event) => setBookingEmail(event.target.value)} className="w-full rounded-xl border border-stone-300 bg-[#f4ecdc] px-4 py-3 text-sm outline-none focus:border-amber-700" placeholder="Email" />
-              <input value={bookingLine} onChange={(event) => setBookingLine(event.target.value)} className="w-full rounded-xl border border-stone-300 bg-[#f4ecdc] px-4 py-3 text-sm outline-none focus:border-amber-700" placeholder="Line ID" />
-              <select value={bookingFormat} onChange={(event) => setBookingFormat(event.target.value)} className="w-full rounded-xl border border-stone-300 bg-[#f4ecdc] px-4 py-3 text-sm outline-none focus:border-amber-700">
-                <option>線上</option>
-                <option>實體</option>
-                <option>線上或實體皆可</option>
-              </select>
-              <input value={bookingTime} onChange={(event) => setBookingTime(event.target.value)} className="w-full rounded-xl border border-stone-300 bg-[#f4ecdc] px-4 py-3 text-sm outline-none focus:border-amber-700" placeholder="希望時段，例如：平日晚上、週末下午" />
-              <textarea value={bookingNote} onChange={(event) => setBookingNote(event.target.value)} className="min-h-[96px] w-full rounded-xl border border-stone-300 bg-[#f4ecdc] px-4 py-3 text-sm outline-none focus:border-amber-700" placeholder="其他想先告訴我的事（選填）" />
-            </div>
-            {bookingError && <p className="mt-3 text-sm text-red-600">請至少填寫姓名與正確 Email。</p>}
-            {bookingSent ? (
-              <div className="mt-5 rounded-xl border border-amber-700/20 bg-[#f4ecdc] p-4 text-sm leading-7 text-stone-700">
-                已收到你的預約資料。我會再與你確認可預約時段。
-              </div>
-            ) : (
-              <Button type="submit" className="mt-5 w-full rounded-xl bg-stone-950 py-6 text-base font-semibold text-amber-100 hover:bg-stone-800">
-                送出預約
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            )}
-            <p className="mt-3 text-xs leading-6 text-stone-500">你的資料只用於預約與聯繫，我會妥善保護你的隱私。</p>
-          </form>
         </section>
 
         <section className="bg-[#0b0a08] px-5 py-16 text-stone-100 md:px-10">
           <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-center">
             <div className="relative min-h-[300px] overflow-hidden rounded-[2rem] border border-amber-300/20 bg-black/60 p-8">
-              <img src="/framework-guidance-hero.png" alt="下一扇門" className="absolute inset-0 h-full w-full object-cover opacity-55" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/65 to-black/25" />
+              <img src="/framework-guidance-hero.png" alt="下一扇門" className="absolute inset-0 h-full w-full object-cover opacity-65" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/65 to-black/20" />
               <div className="relative z-10">
                 <SectionLabel icon={KeyRound} tone="amber">下一扇門</SectionLabel>
                 <h2 className="text-3xl font-semibold tracking-[-0.04em]">第二層｜破框重塑</h2>
