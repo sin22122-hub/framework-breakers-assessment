@@ -19,6 +19,9 @@ import {
   KeyRound,
   Mail,
   Gift,
+  Clock3,
+  MapPin,
+  BadgeDollarSign,
 } from "lucide-react";
 
 const obsessions = {
@@ -956,9 +959,9 @@ function FrameworkGuidancePage() {
   return (
     <div className={`min-h-screen ${pageBg} text-stone-950 selection:bg-amber-200 selection:text-stone-950`}>
       <header className="sticky top-0 z-40 border-b border-amber-300/10 bg-[#050403]/95 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-2 md:px-10">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 md:px-10 md:py-4">
           <button onClick={() => (window.location.href = "/")} className="flex items-center text-left">
-            <img src="/framework-logo.png" alt="Framework Breakers" className="h-[58px] w-auto object-contain md:h-[64px]" />
+            <img src="/framework-logo.png" alt="Framework Breakers" className="h-[74px] w-auto object-contain md:h-[92px]" />
           </button>
           <nav className="hidden items-center gap-7 text-xs font-medium tracking-[0.2em] text-stone-400 md:flex">
             <button onClick={() => (window.location.href = "/")} className="hover:text-amber-100">測驗</button>
@@ -1139,22 +1142,25 @@ function FrameworkGuidancePage() {
               ))}
             </div>
           </div>
-          <div className="rounded-2xl bg-[#0b0a08] p-7 text-stone-100 shadow-xl">
-            <h2 className="mb-5 text-2xl font-semibold text-amber-100">服務資訊</h2>
-            <div className="grid grid-cols-4 gap-0 overflow-hidden rounded-2xl border border-amber-300/20 bg-black/30">
+          <div className="rounded-2xl bg-[#0b0a08] px-7 py-8 text-stone-100 shadow-xl md:py-10">
+            <h2 className="mb-8 text-center text-3xl font-semibold tracking-[0.12em] text-stone-100">服務資訊</h2>
+            <div className="grid grid-cols-2 gap-0 overflow-hidden rounded-2xl border border-amber-300/20 bg-black/20 md:grid-cols-4">
               {[
-                ["時間", "60分鐘"],
-                ["形式", "線上 / 實體"],
-                ["費用", "NT$2,000"],
-                ["交付成果", "藍圖 PDF"],
-              ].map(([title, text], index) => (
-                <div key={title} className={`p-4 text-center ${index > 0 ? "border-l border-amber-300/15" : ""}`}>
-                  <p className="text-[10px] tracking-[0.22em] text-amber-200">{title}</p>
-                  <p className="mt-2 text-sm font-semibold md:text-base">{text}</p>
+                ["時間", "60 分鐘", Clock3],
+                ["形式", "線上 / 實體", MapPin],
+                ["費用", "NT$ 2,000", BadgeDollarSign],
+                ["交付成果", "個人破框藍圖 PDF", FileText],
+              ].map(([title, text, Icon], index) => (
+                <div key={title} className={`flex min-h-[150px] flex-col items-center justify-center px-4 py-8 text-center ${index % 2 === 1 ? "border-l border-amber-300/15" : ""} ${index >= 2 ? "border-t border-amber-300/15 md:border-t-0" : ""} ${index > 0 ? "md:border-l md:border-amber-300/15" : ""}`}>
+                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-amber-300/40 bg-amber-300/10 text-amber-200">
+                    <Icon className="h-7 w-7" />
+                  </div>
+                  <p className="text-sm font-semibold tracking-[0.18em] text-amber-200">{title}</p>
+                  <p className="mt-3 text-base font-semibold leading-7 text-stone-50 md:text-lg">{text}</p>
                 </div>
               ))}
             </div>
-            <p className="mt-4 text-sm leading-7 text-stone-400">會談後 24 小時內寄送個人破框藍圖 PDF。</p>
+            <p className="mt-5 text-center text-sm leading-7 text-stone-400">會談後 24 小時內寄送 PDF，作為你第一層破框引導的專屬成果。</p>
           </div>
         </section>
 
