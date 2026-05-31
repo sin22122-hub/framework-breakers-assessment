@@ -1125,42 +1125,47 @@ function FrameworkGuidancePage() {
           </div>
         </section>
 
-        <section className="mx-auto grid max-w-7xl gap-6 px-5 pb-16 md:grid-cols-[0.9fr_0.9fr_1.2fr] md:px-10">
-          <div className={`rounded-2xl border ${borderSoft} ${cardBg} p-7 shadow-sm`}>
-            <h2 className="mb-5 text-2xl font-semibold">你可能適合破框引導</h2>
-            <div className="space-y-3 text-sm leading-7 text-stone-700">
-              {goodFit.map((item) => (
-                <p key={item} className="flex gap-2"><CheckCircle2 className="mt-1 h-4 w-4 text-amber-700" />{item}</p>
-              ))}
+        <section className="mx-auto max-w-7xl px-5 pb-8 md:px-10">
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className={`rounded-2xl border ${borderSoft} ${cardBg} p-6 shadow-sm md:min-h-[230px]`}>
+              <h2 className="mb-5 text-2xl font-semibold">你可能適合破框引導</h2>
+              <div className="space-y-3 text-sm leading-7 text-stone-700">
+                {goodFit.map((item) => (
+                  <p key={item} className="flex gap-2"><CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-amber-700" />{item}</p>
+                ))}
+              </div>
+            </div>
+            <div className={`rounded-2xl border ${borderSoft} ${cardBg} p-6 shadow-sm md:min-h-[230px]`}>
+              <h2 className="mb-5 text-2xl font-semibold">這可能不適合你</h2>
+              <div className="space-y-3 text-sm leading-7 text-stone-700">
+                {notFit.map((item) => (
+                  <p key={item} className="flex gap-2"><span className="mt-0.5 shrink-0 text-lg text-stone-400">×</span>{item}</p>
+                ))}
+              </div>
             </div>
           </div>
-          <div className={`rounded-2xl border ${borderSoft} ${cardBg} p-7 shadow-sm`}>
-            <h2 className="mb-5 text-2xl font-semibold">這可能不適合你</h2>
-            <div className="space-y-3 text-sm leading-7 text-stone-700">
-              {notFit.map((item) => (
-                <p key={item} className="flex gap-2"><span className="mt-0.5 text-lg text-stone-400">×</span>{item}</p>
-              ))}
-            </div>
-          </div>
-          <div className="rounded-2xl bg-[#0b0a08] px-7 py-8 text-stone-100 shadow-xl md:py-10">
-            <h2 className="mb-8 text-center text-3xl font-semibold tracking-[0.12em] text-stone-100">服務資訊</h2>
-            <div className="grid grid-cols-2 gap-0 overflow-hidden rounded-2xl border border-amber-300/20 bg-black/20 md:grid-cols-4">
+        </section>
+
+        <section className="mx-auto max-w-7xl px-5 pb-16 md:px-10">
+          <div className="rounded-2xl bg-[#0b0a08] px-6 py-7 text-stone-100 shadow-xl md:px-9 md:py-8">
+            <h2 className="mb-7 text-center text-3xl font-semibold tracking-[0.12em] text-stone-100">服務資訊</h2>
+            <div className="grid overflow-hidden rounded-xl border border-amber-300/20 bg-black/20 md:grid-cols-4">
               {[
                 ["時間", "60 分鐘", Clock3],
                 ["形式", "線上 / 實體", MapPin],
                 ["費用", "NT$ 2,000", BadgeDollarSign],
                 ["交付成果", "個人破框藍圖 PDF", FileText],
               ].map(([title, text, Icon], index) => (
-                <div key={title} className={`flex min-h-[150px] flex-col items-center justify-center px-4 py-8 text-center ${index % 2 === 1 ? "border-l border-amber-300/15" : ""} ${index >= 2 ? "border-t border-amber-300/15 md:border-t-0" : ""} ${index > 0 ? "md:border-l md:border-amber-300/15" : ""}`}>
-                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-amber-300/40 bg-amber-300/10 text-amber-200">
-                    <Icon className="h-7 w-7" />
+                <div key={title} className={`flex min-h-[132px] flex-col items-center justify-center px-5 py-6 text-center ${index > 0 ? "border-t border-amber-300/15 md:border-l md:border-t-0" : ""}`}>
+                  <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-full border border-amber-300/40 bg-amber-300/10 text-amber-200">
+                    <Icon className="h-6 w-6" />
                   </div>
                   <p className="text-sm font-semibold tracking-[0.18em] text-amber-200">{title}</p>
-                  <p className="mt-3 text-base font-semibold leading-7 text-stone-50 md:text-lg">{text}</p>
+                  <p className="mt-2 text-base font-semibold leading-7 text-stone-50 md:text-lg">{text}</p>
                 </div>
               ))}
             </div>
-            <p className="mt-5 text-center text-sm leading-7 text-stone-400">會談後 24 小時內寄送 PDF，作為你第一層破框引導的專屬成果。</p>
+            <p className="mt-4 text-center text-sm leading-7 text-stone-400">會談後 24 小時內寄送 PDF，作為你第一層破框引導的專屬成果。</p>
           </div>
         </section>
 
