@@ -139,7 +139,7 @@ export default function FrameworkGuidance() {
       <header className="sticky top-0 z-40 border-b border-amber-300/10 bg-[#050403]/95 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-2 md:px-10 md:py-3">
           <button onClick={() => (window.location.href = "/")} className="flex items-center text-left">
-            <img src={logoSrc} alt="Framework Breakers" className="h-[94px] w-auto object-contain md:h-[116px]" />
+            <img src={logoSrc} alt="Framework Breakers" className="h-[110px] w-auto object-contain md:h-[135px]" />
           </button>
           <nav className="hidden items-center gap-7 text-xs font-medium tracking-[0.2em] text-stone-400 md:flex">
             <button onClick={() => (window.location.href = "/")} className="hover:text-amber-100">測驗</button>
@@ -155,7 +155,15 @@ export default function FrameworkGuidance() {
 
       <section className="relative overflow-hidden border-b border-amber-300/10 bg-[#050403] px-5 py-14 md:px-10 md:py-20">
         <div className="absolute inset-y-0 right-0 hidden w-[58%] md:block">
-          <img src={heroSrc} alt="破框引導光門" className="h-full w-full object-cover object-center brightness-[1.45] contrast-[1.18] saturate-[1.12]" />
+          <img src={heroSrc} alt="破框引導光門" className="h-full w-full object-cover object-center brightness-[1.55] contrast-[1.22] saturate-[1.12]" />
+          <div className="absolute inset-y-0 right-0 w-[46%] bg-gradient-to-l from-[#050403]/82 via-[#050403]/48 to-transparent" />
+          <div className="absolute right-[7%] top-1/2 hidden -translate-y-1/2 text-right md:block">
+            <p className="text-2xl font-semibold leading-[2.1] tracking-[0.14em] text-amber-100 drop-shadow-[0_2px_14px_rgba(0,0,0,0.85)]">
+              每一次破框，<br />
+              都始於願意<br />
+              誠實看見自己。
+            </p>
+          </div>
         </div>
         <div className="absolute inset-y-0 left-0 w-[70%] bg-gradient-to-r from-[#050403] via-[#050403]/88 to-transparent" />
         <div className="relative mx-auto grid max-w-7xl gap-10 md:grid-cols-[0.95fr_1.05fr] md:items-center">
@@ -199,7 +207,7 @@ export default function FrameworkGuidance() {
             </div>
             <a href="#booking" className="mt-8 inline-block">
               <Button className="rounded-xl bg-amber-200 px-8 py-6 text-base font-semibold text-stone-950 hover:bg-amber-100">
-                預約破框引導
+                我想停止一直重複
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </a>
@@ -285,6 +293,29 @@ export default function FrameworkGuidance() {
         </section>
 
         <section className="mx-auto max-w-7xl px-5 pb-16 md:px-10">
+          <div className="grid overflow-hidden rounded-[2rem] border border-amber-900/15 bg-[#0b0a08] text-stone-100 shadow-xl md:grid-cols-[0.38fr_0.62fr]">
+            <div className="border-b border-amber-300/15 bg-black/40 p-7 md:border-b-0 md:border-r md:p-8">
+              <SectionLabel icon={Eye} tone="amber">Alpha 如何進行破框引導</SectionLabel>
+              <h2 className="text-3xl font-semibold tracking-[-0.04em] text-stone-50">不是替你下定論，而是陪你看見真正重複的地方。</h2>
+            </div>
+            <div className="p-7 md:p-8">
+              <p className="text-lg leading-9 text-stone-200">
+                我不會告訴你該怎麼做。我會陪你一起看見：你如何一步一步形成現在的人生模式。
+                有時候，問題不是能力不足，而是你一直在用同一套方式保護自己。
+              </p>
+              <div className="mt-6 grid gap-3 text-sm leading-7 text-stone-300 md:grid-cols-2">
+                {["不分析對錯", "不給標準答案", "不說服你改變", "陪你看見真正的自己"].map((item) => (
+                  <p key={item} className="flex gap-2">
+                    <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-amber-200" />
+                    {item}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-5 pb-16 md:px-10">
           <div className={`rounded-[1.75rem] border ${borderSoft} ${cardBg} p-8 shadow-sm`}>
             <h2 className="text-center text-3xl font-semibold tracking-[-0.04em] md:text-4xl">60 分鐘會談流程</h2>
             <div className="relative mt-10 grid gap-8 md:grid-cols-4">
@@ -347,7 +378,7 @@ export default function FrameworkGuidance() {
         </section>
 
         <section className="bg-[#0b0a08] px-5 py-10 text-stone-100 md:px-10">
-          <div className="mx-auto grid max-w-7xl overflow-hidden rounded-[2rem] border border-amber-300/20 bg-black md:grid-cols-[0.34fr_0.44fr_0.22fr]">
+          <div className="mx-auto grid max-w-7xl overflow-hidden rounded-[2rem] border border-amber-300/20 bg-black md:grid-cols-[0.38fr_0.42fr_0.20fr]">
             <div className="relative min-h-[210px]">
               <img src={heroSrc} alt="下一扇門" className="absolute inset-0 h-full w-full object-cover object-center brightness-125 contrast-110" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-black/20 to-black/70" />
@@ -380,7 +411,7 @@ export default function FrameworkGuidance() {
             </div>
             <a href="#booking">
               <Button className="rounded-xl bg-amber-200 px-8 py-6 text-base font-semibold text-stone-950 hover:bg-amber-100">
-                預約破框引導
+                我想停止一直重複
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </a>

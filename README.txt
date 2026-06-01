@@ -1,11 +1,10 @@
-上傳方式：
-1. 解壓縮 ZIP
-2. 進 GitHub Repository
-3. 點 Add file → Upload files
-4. 把解壓後的所有檔案與 src 資料夾一起拖曳上去
-5. 選 Replace existing files
-6. Commit changes
+Framework Guidance V2.2 Final Production
 
-本版更新：
-- Q6 題目已改為「你覺得自己最常敗在哪一步？」
-- 保留 Google Form 串接、Email 解鎖、雙 CTA、返回上一題與結果頁結構
+更新內容：
+- Hero 圖提升解析度，右側金色標語改為 HTML 疊字，避免圖片文字模糊
+- Logo 放大並使用高解析版本
+- 新增「Alpha 如何進行破框引導」區塊
+- CTA 文案調整為「我想停止一直重複」
+- 下一扇門區塊光門比例微調
+- 保留結果頁 CTA 串接 /framework-guidance
+- 保留 Google Form 串接與 vercel.json 子路徑設定
