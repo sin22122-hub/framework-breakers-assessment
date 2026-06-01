@@ -114,7 +114,7 @@ export default function FrameworkGuidance() {
 
   const blueprintItems = [
     ["Alpha 觀察", "看見的不是你的問題，而是你的模式。", Eye],
-    ["現實中的保護模式", "從工作、關係、情緒三個面向，看見你如何保護自己。", Lock],
+    ["現實中的保護模式", "從工作、關係、情緒、金錢四個面向，看見你如何保護自己。", Lock],
     ["當前課題", "找出你真正需要練習、突破的關鍵課題。", KeyRound],
     ["下一步建議", "具體的停止、選擇、行動練習，幫助你開始改變。", ArrowRight],
   ];
