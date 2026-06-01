@@ -139,7 +139,7 @@ export default function FrameworkGuidance() {
       <header className="sticky top-0 z-40 border-b border-amber-300/10 bg-[#050403]/95 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-2 md:px-10 md:py-3">
           <button onClick={() => (window.location.href = "/")} className="flex items-center text-left">
-            <img src={logoSrc} alt="Framework Breakers" className="h-[94px] w-auto object-contain md:h-[116px]" />
+            <img src={logoSrc} alt="Framework Breakers" className="h-[110px] w-auto object-contain md:h-[135px]" />
           </button>
           <nav className="hidden items-center gap-7 text-xs font-medium tracking-[0.2em] text-stone-400 md:flex">
             <button onClick={() => (window.location.href = "/")} className="hover:text-amber-100">測驗</button>
@@ -155,9 +155,12 @@ export default function FrameworkGuidance() {
 
       <section className="relative overflow-hidden border-b border-amber-300/10 bg-[#050403] px-5 py-14 md:px-10 md:py-20">
         <div className="absolute inset-y-0 right-0 hidden w-[58%] md:block">
-          <img src={heroSrc} alt="破框引導光門" className="h-full w-full object-cover object-center brightness-[1.45] contrast-[1.18] saturate-[1.12]" />
+          <img src={heroSrc} alt="破框引導光門" className="h-full w-full object-cover object-center brightness-[1.55] contrast-[1.22] saturate-[1.12]" />
         </div>
         <div className="absolute inset-y-0 left-0 w-[70%] bg-gradient-to-r from-[#050403] via-[#050403]/88 to-transparent" />
+        <div className="absolute right-[7%] top-[38%] z-[2] hidden max-w-[260px] text-right text-xl font-semibold leading-[2.1] tracking-[0.12em] text-amber-100 drop-shadow-[0_3px_18px_rgba(0,0,0,0.85)] md:block">
+          每一次破框，<br />都始於願意<br />誠實看見自己。
+        </div>
         <div className="relative mx-auto grid max-w-7xl gap-10 md:grid-cols-[0.95fr_1.05fr] md:items-center">
           <div className="relative z-10">
             <div className="mb-5 inline-flex rounded-full border border-amber-300/20 bg-black/45 px-4 py-2 text-xs font-semibold tracking-[0.22em] text-amber-100">
