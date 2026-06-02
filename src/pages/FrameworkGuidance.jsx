@@ -19,18 +19,15 @@ import logoSrc from "@/assets/framework-logo.png";
 import heroSrc from "@/assets/framework-guidance-hero.png";
 import blueprintSrc from "@/assets/blueprint-preview.png";
 
-const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfgIhKyFPDMSt4NyLHWxoHqJYTz9XVylT4R90lqgZQOJj5mGw/formResponse";
+const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdojgTY_u38L7MedfxVn5_CR2btHWjpHr6cx97toMPuz6s1ng/formResponse";
 
 const GOOGLE_FORM_FIELDS = {
-  name: "entry.1407072553",
-  email: "entry.1917274556",
-  outer: "entry.1357505889",
-  inner: "entry.1940201517",
-  main: "entry.1484495161",
-  second: "entry.1748881777",
-  intensity: "entry.1727596188",
-  report: "entry.931356060",
-  coaching: "entry.1636982887",
+  name: "entry.876609887",
+  email: "entry.2092705005",
+  line: "entry.569166251",
+  format: "entry.1017864910",
+  time: "entry.160837535",
+  note: "entry.17835560",
 };
 
 async function submitLeadToGoogleForm(payload) {
@@ -38,18 +35,15 @@ async function submitLeadToGoogleForm(payload) {
     const formData = new FormData();
     formData.append(GOOGLE_FORM_FIELDS.name, payload.name || "");
     formData.append(GOOGLE_FORM_FIELDS.email, payload.email || "");
-    formData.append(GOOGLE_FORM_FIELDS.outer, payload.outer || "");
-    formData.append(GOOGLE_FORM_FIELDS.inner, payload.inner || "");
-    formData.append(GOOGLE_FORM_FIELDS.main, payload.main || "");
-    formData.append(GOOGLE_FORM_FIELDS.second, payload.second || "");
-    formData.append(GOOGLE_FORM_FIELDS.intensity, String(payload.intensity || ""));
-    formData.append(GOOGLE_FORM_FIELDS.report, payload.report || "");
-    formData.append(GOOGLE_FORM_FIELDS.coaching, payload.coaching || "");
+    formData.append(GOOGLE_FORM_FIELDS.line, payload.line || "");
+    formData.append(GOOGLE_FORM_FIELDS.format, payload.format || "");
+    formData.append(GOOGLE_FORM_FIELDS.time, payload.time || "");
+    formData.append(GOOGLE_FORM_FIELDS.note, payload.note || "");
 
     await fetch(GOOGLE_FORM_ACTION_URL, { method: "POST", mode: "no-cors", body: formData });
     return { ok: true };
   } catch (error) {
-    console.error("Failed to submit lead to Google Form:", error);
+    console.error("Failed to submit booking to Google Form:", error);
     return { ok: false, error };
   }
 }
@@ -90,17 +84,19 @@ export default function FrameworkGuidance() {
       return;
     }
 
-    await submitLeadToGoogleForm({
-      name: bookingName,
-      email: bookingEmail,
-      outer: "破框引導頁",
-      inner: "Framework Guidance",
-      main: "破框引導預約",
-      second: `形式:${bookingFormat || "未填"}｜時段:${bookingTime || "未填"}`,
-      intensity: "",
-      report: "",
-      coaching: `破框引導預約｜LINE:${bookingLine || "未填"}｜形式:${bookingFormat || "未填"}｜希望時段:${bookingTime || "未填"}｜補充:${bookingNote || "未填"}`,
+    const result = await submitLeadToGoogleForm({
+      name: bookingName.trim(),
+      email: bookingEmail.trim(),
+      line: bookingLine.trim(),
+      format: bookingFormat,
+      time: bookingTime.trim(),
+      note: bookingNote.trim(),
     });
+
+    if (!result.ok) {
+      setBookingError(true);
+      return;
+    }
 
     setBookingSent(true);
   }
