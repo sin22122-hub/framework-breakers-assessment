@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,40 +19,7 @@ import logoSrc from "@/assets/framework-logo.png";
 import heroSrc from "@/assets/framework-guidance-hero.png";
 import blueprintSrc from "@/assets/blueprint-preview.png";
 
-const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfgIhKyFPDMSt4NyLHWxoHqJYTz9XVylT4R90lqgZQOJj5mGw/formResponse";
-
-const GOOGLE_FORM_FIELDS = {
-  name: "entry.1407072553",
-  email: "entry.1917274556",
-  outer: "entry.1357505889",
-  inner: "entry.1940201517",
-  main: "entry.1484495161",
-  second: "entry.1748881777",
-  intensity: "entry.1727596188",
-  report: "entry.931356060",
-  coaching: "entry.1636982887",
-};
-
-async function submitLeadToGoogleForm(payload) {
-  try {
-    const formData = new FormData();
-    formData.append(GOOGLE_FORM_FIELDS.name, payload.name || "");
-    formData.append(GOOGLE_FORM_FIELDS.email, payload.email || "");
-    formData.append(GOOGLE_FORM_FIELDS.outer, payload.outer || "");
-    formData.append(GOOGLE_FORM_FIELDS.inner, payload.inner || "");
-    formData.append(GOOGLE_FORM_FIELDS.main, payload.main || "");
-    formData.append(GOOGLE_FORM_FIELDS.second, payload.second || "");
-    formData.append(GOOGLE_FORM_FIELDS.intensity, String(payload.intensity || ""));
-    formData.append(GOOGLE_FORM_FIELDS.report, payload.report || "");
-    formData.append(GOOGLE_FORM_FIELDS.coaching, payload.coaching || "");
-
-    await fetch(GOOGLE_FORM_ACTION_URL, { method: "POST", mode: "no-cors", body: formData });
-    return { ok: true };
-  } catch (error) {
-    console.error("Failed to submit lead to Google Form:", error);
-    return { ok: false, error };
-  }
-}
+const GUIDANCE_BOOKING_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdojgTY_u38L7MedfxVn5_CR2btHWjpHr6cx97toMPuz6s1ng/viewform?usp=sf_link";
 
 function SectionLabel({ icon: Icon, children, tone = "stone" }) {
   const color = tone === "amber" ? "text-amber-200" : tone === "red" ? "text-red-200" : "text-stone-300";
@@ -65,44 +32,12 @@ function SectionLabel({ icon: Icon, children, tone = "stone" }) {
 }
 
 export default function FrameworkGuidance() {
-  const [bookingName, setBookingName] = useState("");
-  const [bookingEmail, setBookingEmail] = useState("");
-  const [bookingLine, setBookingLine] = useState("");
-  const [bookingFormat, setBookingFormat] = useState("線上");
-  const [bookingTime, setBookingTime] = useState("");
-  const [bookingNote, setBookingNote] = useState("");
-  const [bookingSent, setBookingSent] = useState(false);
-  const [bookingError, setBookingError] = useState(false);
-
   function goBackToResult() {
     if (typeof window !== "undefined" && window.history.length > 1) {
       window.history.back();
       return;
     }
     if (typeof window !== "undefined") window.location.href = "/";
-  }
-
-  async function submitGuidanceBooking(event) {
-    event.preventDefault();
-    setBookingError(false);
-    if (!bookingName.trim() || !bookingEmail.includes("@") || bookingEmail.trim().length < 5) {
-      setBookingError(true);
-      return;
-    }
-
-    await submitLeadToGoogleForm({
-      name: bookingName,
-      email: bookingEmail,
-      outer: "破框引導頁",
-      inner: "Framework Guidance",
-      main: "破框引導預約",
-      second: `形式:${bookingFormat || "未填"}｜時段:${bookingTime || "未填"}`,
-      intensity: "",
-      report: "",
-      coaching: `破框引導預約｜LINE:${bookingLine || "未填"}｜形式:${bookingFormat || "未填"}｜希望時段:${bookingTime || "未填"}｜補充:${bookingNote || "未填"}`,
-    });
-
-    setBookingSent(true);
   }
 
   const notItems = [
@@ -139,7 +74,7 @@ export default function FrameworkGuidance() {
       <header className="sticky top-0 z-40 border-b border-amber-300/10 bg-[#050403]/95 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-2 md:px-10 md:py-3">
           <button onClick={() => (window.location.href = "/")} className="flex items-center text-left">
-            <img src={logoSrc} alt="Framework Breakers" className="h-[110px] w-auto object-contain md:h-[135px]" />
+            <img src={logoSrc} alt="Framework Breakers" className="h-[94px] w-auto object-contain md:h-[116px]" />
           </button>
           <nav className="hidden items-center gap-7 text-xs font-medium tracking-[0.2em] text-stone-400 md:flex">
             <button onClick={() => (window.location.href = "/")} className="hover:text-amber-100">測驗</button>
@@ -155,12 +90,9 @@ export default function FrameworkGuidance() {
 
       <section className="relative overflow-hidden border-b border-amber-300/10 bg-[#050403] px-5 py-14 md:px-10 md:py-20">
         <div className="absolute inset-y-0 right-0 hidden w-[58%] md:block">
-          <img src={heroSrc} alt="破框引導光門" className="h-full w-full object-cover object-center brightness-[1.55] contrast-[1.22] saturate-[1.12]" />
+          <img src={heroSrc} alt="破框引導光門" className="h-full w-full object-cover object-center brightness-[1.45] contrast-[1.18] saturate-[1.12]" />
         </div>
         <div className="absolute inset-y-0 left-0 w-[70%] bg-gradient-to-r from-[#050403] via-[#050403]/88 to-transparent" />
-        <div className="absolute right-[7%] top-[38%] z-[2] hidden max-w-[260px] text-right text-xl font-semibold leading-[2.1] tracking-[0.12em] text-amber-100 drop-shadow-[0_3px_18px_rgba(0,0,0,0.85)] md:block">
-          每一次破框，<br />都始於願意<br />誠實看見自己。
-        </div>
         <div className="relative mx-auto grid max-w-7xl gap-10 md:grid-cols-[0.95fr_1.05fr] md:items-center">
           <div className="relative z-10">
             <div className="mb-5 inline-flex rounded-full border border-amber-300/20 bg-black/45 px-4 py-2 text-xs font-semibold tracking-[0.22em] text-amber-100">
@@ -200,7 +132,7 @@ export default function FrameworkGuidance() {
                 </div>
               ))}
             </div>
-            <a href="#booking" className="mt-8 inline-block">
+            <a href={GUIDANCE_BOOKING_FORM_URL} target="_blank" rel="noreferrer" className="mt-8 inline-block">
               <Button className="rounded-xl bg-amber-200 px-8 py-6 text-base font-semibold text-stone-950 hover:bg-amber-100">
                 預約破框引導
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -257,34 +189,28 @@ export default function FrameworkGuidance() {
             </div>
           </div>
 
-          <form id="booking" onSubmit={submitGuidanceBooking} className="rounded-[1.75rem] border border-stone-900/10 bg-[#0b0a08] p-6 text-stone-100 shadow-xl md:row-span-2">
+          <div id="booking" className="rounded-[1.75rem] border border-stone-900/10 bg-[#0b0a08] p-6 text-stone-100 shadow-xl md:row-span-2">
             <h2 className="text-2xl font-semibold tracking-[-0.03em] text-amber-100">預約破框引導</h2>
-            <p className="mt-2 text-sm leading-7 text-stone-400">請填寫以下資訊，我會再與你確認時間。</p>
-            <div className="mt-5 space-y-3">
-              <input value={bookingName} onChange={(event) => setBookingName(event.target.value)} className="w-full rounded-xl border border-stone-700 bg-black/30 px-4 py-3 text-sm text-stone-100 outline-none placeholder:text-stone-500 focus:border-amber-300/60" placeholder="姓名" />
-              <input value={bookingEmail} onChange={(event) => setBookingEmail(event.target.value)} className="w-full rounded-xl border border-stone-700 bg-black/30 px-4 py-3 text-sm text-stone-100 outline-none placeholder:text-stone-500 focus:border-amber-300/60" placeholder="Email" />
-              <input value={bookingLine} onChange={(event) => setBookingLine(event.target.value)} className="w-full rounded-xl border border-stone-700 bg-black/30 px-4 py-3 text-sm text-stone-100 outline-none placeholder:text-stone-500 focus:border-amber-300/60" placeholder="Line ID" />
-              <select value={bookingFormat} onChange={(event) => setBookingFormat(event.target.value)} className="w-full rounded-xl border border-stone-700 bg-black/30 px-4 py-3 text-sm text-stone-100 outline-none focus:border-amber-300/60">
-                <option>線上</option>
-                <option>實體</option>
-                <option>線上或實體皆可</option>
-              </select>
-              <input value={bookingTime} onChange={(event) => setBookingTime(event.target.value)} className="w-full rounded-xl border border-stone-700 bg-black/30 px-4 py-3 text-sm text-stone-100 outline-none placeholder:text-stone-500 focus:border-amber-300/60" placeholder="希望時段，例如：平日晚上、週末下午" />
-              <textarea value={bookingNote} onChange={(event) => setBookingNote(event.target.value)} className="min-h-[96px] w-full rounded-xl border border-stone-700 bg-black/30 px-4 py-3 text-sm text-stone-100 outline-none placeholder:text-stone-500 focus:border-amber-300/60" placeholder="其他想先告訴我的事（選填）" />
-            </div>
-            {bookingError && <p className="mt-3 text-sm text-red-300">請至少填寫姓名與正確 Email。</p>}
-            {bookingSent ? (
-              <div className="mt-5 rounded-xl border border-amber-300/20 bg-amber-950/20 p-4 text-sm leading-7 text-amber-50">
-                已收到你的預約資料。我會再與你確認可預約時段。
+            <p className="mt-2 text-sm leading-7 text-stone-400">
+              點擊下方按鈕後，會開啟獨立的 Google 預約表單。填寫完成後，我會再與你確認可預約時段。
+            </p>
+            <div className="mt-5 rounded-2xl border border-amber-300/15 bg-amber-950/10 p-5">
+              <div className="space-y-3 text-sm leading-7 text-stone-300">
+                <p className="flex gap-2"><CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-amber-200" />姓名、Email、Line ID</p>
+                <p className="flex gap-2"><CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-amber-200" />希望引導形式：線上 / 實體 / 皆可</p>
+                <p className="flex gap-2"><CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-amber-200" />希望預約時段</p>
               </div>
-            ) : (
-              <Button type="submit" className="mt-5 w-full rounded-xl bg-amber-200 py-6 text-base font-semibold text-stone-950 hover:bg-amber-100">
-                送出預約
+            </div>
+            <a href={GUIDANCE_BOOKING_FORM_URL} target="_blank" rel="noreferrer" className="mt-5 block">
+              <Button className="w-full rounded-xl bg-amber-200 py-6 text-base font-semibold text-stone-950 hover:bg-amber-100">
+                開啟預約表單
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-            )}
-            <p className="mt-3 text-xs leading-6 text-stone-500">你的資料只用於預約與聯繫，我會妥善保護你的隱私。</p>
-          </form>
+            </a>
+            <p className="mt-3 text-xs leading-6 text-stone-500">
+              預約資料會進入獨立的破框引導預約表，不會與測驗結果資料混在一起。
+            </p>
+          </div>
         </section>
 
         <section className="mx-auto max-w-7xl px-5 pb-16 md:px-10">
@@ -381,7 +307,7 @@ export default function FrameworkGuidance() {
               <h2 className="text-3xl font-semibold tracking-[-0.04em]">改變人生，不是找到新的方法。</h2>
               <p className="mt-3 text-lg leading-8 text-stone-300">而是停止重複舊的模式。</p>
             </div>
-            <a href="#booking">
+            <a href={GUIDANCE_BOOKING_FORM_URL} target="_blank" rel="noreferrer">
               <Button className="rounded-xl bg-amber-200 px-8 py-6 text-base font-semibold text-stone-950 hover:bg-amber-100">
                 預約破框引導
                 <ArrowRight className="ml-2 h-4 w-4" />
